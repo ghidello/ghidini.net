@@ -1,0 +1,4 @@
+baseURL = 'https://ghidini.net/'
+languageCode = 'en-us'
+title = 'Alessandro Ghidini'
+theme = 'ghidello'
