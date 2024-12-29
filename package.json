@@ -1,0 +1,9 @@
+{
+  "name": "ghidini.net",
+  "author": "Alessandro Ghidini",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "server": "hugo server -D -F --gc --cleanDestinationDir --disableFastRender --enableGitInfo --templateMetrics --templateMetricsHints"
+  }
+}

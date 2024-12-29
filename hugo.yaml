@@ -1,0 +1,20 @@
+baseURL: https://ghidini.net/
+languageCode: en-us
+title: It finally clicked
+
+menus:
+  main:
+    - name: Home
+      pageRef: /
+      weight: 10
+    - name: Posts
+      pageRef: /posts
+      weight: 20
+    - name: Cheatsheets
+      pageRef: /cheatsheets
+      weight: 30
+      
+module:
+  hugoVersion:
+    extended: false
+    min: 0.116.0
