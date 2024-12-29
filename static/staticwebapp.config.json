@@ -6,7 +6,8 @@
     }
   },
   "globalHeaders": {
-    "content-security-policy": "default-src 'none'; script-src-elem 'self'; style-src-elem 'self'; img-src 'self'; manifest-src 'self'; upgrade-insecure-requests; connect-src 'self'",
+    "content-security-policy": "default-src 'none'; script-src-elem 'self'; style-src-elem 'self'; img-src 'self'; manifest-src 'self'; upgrade-insecure-requests",
+    "Permissions-Policy": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
     "Cross-Origin-Embedder-Policy": "require-corp",
     "Cross-Origin-Opener-Policy": "same-origin",
     "Referrer-Policy": "strict-origin-when-cross-origin",
