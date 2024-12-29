@@ -4,6 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "build": "hugo",
     "server": "hugo server -D -F --gc --cleanDestinationDir --disableFastRender --enableGitInfo --templateMetrics --templateMetricsHints"
   }
 }
