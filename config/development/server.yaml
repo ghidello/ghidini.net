@@ -1,0 +1,16 @@
+headers:
+- for: /**
+  values:
+    Content-Security-Policy: default-src 'none'; script-src-elem 'self'; style-src-elem 'self'; img-src 'self'; manifest-src 'self'; upgrade-insecure-requests; connect-src 'self'
+    Cross-Origin-Embedder-Policy: require-corp
+    Cross-Origin-Opener-Policy: same-origin
+    Referrer-Policy: strict-origin-when-cross-origin
+    X-Content-Type-Options: nosniff
+    X-Frame-Options: DENY
+    X-XSS-Protection: 1; mode=block
+
+redirects:
+- force: false
+  from: '/**'
+  status: 404
+  to: /404.html
