@@ -5,3 +5,5 @@ draft: true
 ---
 
 [Abbreviation recommendations for Azure resources](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming)
+
+[Azure Speed Test 2.0](https://azurespeedtest.azurewebsites.net/)
