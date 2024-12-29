@@ -1,7 +1,7 @@
 ---
-date: '2024-12-29T17:35:38+01:00'
+title: Git
+date: 2024-12-29T16:00:00+01:00
 draft: true
-title: 'Git'
 ---
 
 ```shell

@@ -1,7 +1,7 @@
 ---
-date: '2024-12-29T17:49:20+01:00'
+title: Hugo
+date: 2024-12-29T16:00:00+01:00
 draft: true
-title: 'Hugo'
 ---
 
 ```shell
