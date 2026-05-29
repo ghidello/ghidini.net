@@ -1,13 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
-<BaseLayout title="The Flux Capacitor - Software Development Blog">
+<BaseLayout title={`${SITE_TITLE} - Software Development Blog`}>
   <section class="mb-12">
     <h1 class="mb-4 text-4xl font-bold">Hey, I'm Alessandro 👋</h1>
     <p class="text-lg leading-relaxed text-(--color-text-secondary)">
@@ -41,13 +43,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
                 </h3>
                 <p class="mt-1 text-(--color-text-secondary)">{post.data.description}</p>
                 <div class="mt-2 flex items-center gap-3 text-sm text-(--color-text-secondary)">
-                  <time datetime={post.data.pubDate.toISOString()}>
-                    {post.data.pubDate.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                  </time>
+                  <FormattedDate date={post.data.pubDate} />
                   {post.data.series && (
                     <span class="rounded-full bg-(--color-accent)/10 px-2 py-0.5 text-xs text-(--color-accent)">
                       Series: {post.data.series.replace(/-/g, ' ')}

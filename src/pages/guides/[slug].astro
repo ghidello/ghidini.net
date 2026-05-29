@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE } from '../../consts';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
@@ -15,7 +17,7 @@ const { title, description, pubDate, updatedDate, topic, tags } = guide.data;
 const { Content } = await render(guide);
 ---
 
-<BaseLayout title={`${title} - The Flux Capacitor`} description={description}>
+<BaseLayout title={`${title} - ${SITE_TITLE}`} description={description}>
   <article>
     <header class="mb-8">
       <a href="/guides" class="mb-2 inline-block text-sm text-(--color-accent) hover:underline">
@@ -30,19 +32,11 @@ const { Content } = await render(guide);
         >
           {topic}
         </span>
-        <time datetime={pubDate.toISOString()}>
-          {pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </time>
+        <FormattedDate date={pubDate} format="long" />
         {
           updatedDate && (
             <span>
-              (Updated:{' '}
-              {updatedDate.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-              )
+              (Updated: <FormattedDate date={updatedDate} format="long" />)
             </span>
           )
         }

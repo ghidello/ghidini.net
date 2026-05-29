@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import SeriesNavigation from '../components/SeriesNavigation.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -20,19 +21,11 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = post.data;
         {title}
       </h1>
       <div class="flex flex-wrap items-center gap-3 text-sm text-(--color-text-secondary)">
-        <time datetime={pubDate.toISOString()}>
-          {pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </time>
+        <FormattedDate date={pubDate} format="long" />
         {
           updatedDate && (
             <span>
-              (Updated:{' '}
-              {updatedDate.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-              )
+              (Updated: <FormattedDate date={updatedDate} format="long" />)
             </span>
           )
         }

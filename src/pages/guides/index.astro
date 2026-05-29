@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE } from '../../consts';
 
 const guides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -17,10 +19,7 @@ for (const guide of guides) {
 }
 ---
 
-<BaseLayout
-  title="Guides - The Flux Capacitor"
-  description="Quick reference guides and cheatsheets"
->
+<BaseLayout title={`Guides - ${SITE_TITLE}`} description="Quick reference guides and cheatsheets">
   <h1 class="mb-2 text-3xl font-bold">Guides</h1>
   <p class="mb-8 text-(--color-text-secondary)">
     Quick reference cheatsheets and commands I always forget.
@@ -45,15 +44,10 @@ for (const guide of guides) {
                       {guide.data.title}
                     </span>
                     <span class="ml-2 shrink-0 text-xs text-(--color-text-secondary)">
-                      {guide.data.updatedDate
-                        ? guide.data.updatedDate.toLocaleDateString('en-US', {
-                            month: 'short',
-                            year: 'numeric',
-                          })
-                        : guide.data.pubDate.toLocaleDateString('en-US', {
-                            month: 'short',
-                            year: 'numeric',
-                          })}
+                      <FormattedDate
+                        date={guide.data.updatedDate ?? guide.data.pubDate}
+                        format="month-year"
+                      />
                     </span>
                   </a>
                 </li>

@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE } from '../consts';
 
 const lastUpdated = 'May 29, 2026';
 ---
 
-<BaseLayout title="Terms of Use - The Flux Capacitor" description="Terms of use for ghidini.net">
+<BaseLayout title={`Terms of Use - ${SITE_TITLE}`} description="Terms of use for ghidini.net">
   <article class="prose-content">
     <h1 class="mb-2 text-3xl font-bold">Terms of Use</h1>
     <p class="mb-8 text-sm text-(--color-text-secondary)">Last updated: {lastUpdated}</p>

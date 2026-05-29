@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE_TITLE } from '../../consts';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft && data.series);
 
@@ -20,7 +21,7 @@ for (const [, seriesPosts] of seriesMap) {
 }
 ---
 
-<BaseLayout title="Series - The Flux Capacitor" description="Blog post series">
+<BaseLayout title={`Series - ${SITE_TITLE}`} description="Blog post series">
   <h1 class="mb-8 text-3xl font-bold">Series</h1>
 
   {
