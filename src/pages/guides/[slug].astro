@@ -1,0 +1,145 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((guide) => ({
+    params: { slug: guide.id },
+    props: { guide },
+  }));
+}
+
+const { guide } = Astro.props;
+const { title, description, pubDate, updatedDate, topic, tags } = guide.data;
+const { Content } = await render(guide);
+---
+
+<BaseLayout title={`${title} - The Flux Capacitor`} description={description}>
+  <article>
+    <header class="mb-8">
+      <a href="/guides" class="text-sm text-(--color-accent) hover:underline mb-2 inline-block">
+        &larr; All Guides
+      </a>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-2 text-(--color-text)">
+        {title}
+      </h1>
+      <div class="flex flex-wrap items-center gap-3 text-sm text-(--color-text-secondary)">
+        <span class="px-2 py-0.5 rounded-full bg-(--color-accent)/10 text-(--color-accent) text-xs capitalize">
+          {topic}
+        </span>
+        <time datetime={pubDate.toISOString()}>
+          {pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+        {updatedDate && (
+          <span>
+            (Updated: {updatedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })})
+          </span>
+        )}
+      </div>
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-3">
+          {tags.map((tag) => (
+            <span class="px-2 py-1 text-xs rounded-full bg-(--color-bg-secondary) text-(--color-text-secondary) border border-(--color-border)">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="prose-content">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose-content :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .prose-content :global(h3) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .prose-content :global(p) {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+  }
+
+  .prose-content :global(a) {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose-content :global(a:hover) {
+    color: var(--color-accent-hover);
+  }
+
+  .prose-content :global(code) {
+    background-color: var(--color-code-bg);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  .prose-content :global(pre) {
+    background-color: var(--color-code-bg);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose-content :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+
+  .prose-content :global(ul),
+  .prose-content :global(ol) {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose-content :global(li) {
+    margin-bottom: 0.25rem;
+    line-height: 1.75;
+  }
+
+  .prose-content :global(blockquote) {
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+
+  .prose-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose-content :global(th),
+  .prose-content :global(td) {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    text-align: left;
+  }
+
+  .prose-content :global(th) {
+    background-color: var(--color-bg-secondary);
+    font-weight: 600;
+  }
+</style>

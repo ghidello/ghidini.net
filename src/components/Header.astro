@@ -1,0 +1,24 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="sticky top-0 z-50 border-b border-(--color-border) bg-(--color-bg)/80 backdrop-blur-sm">
+  <nav class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 text-xl font-bold text-(--color-accent) hover:text-(--color-accent-hover) transition-colors">
+      <img src="/favicon.svg" alt="The Flux Capacitor logo" class="w-7 h-7" />
+      The Flux Capacitor
+    </a>
+    <div class="flex items-center gap-6">
+      <a href="/blog" class="text-(--color-text-secondary) hover:text-(--color-text) transition-colors">
+        Blog
+      </a>
+      <a href="/guides" class="text-(--color-text-secondary) hover:text-(--color-text) transition-colors">
+        Guides
+      </a>
+      <a href="/series" class="text-(--color-text-secondary) hover:text-(--color-text) transition-colors">
+        Series
+      </a>
+      <ThemeToggle />
+    </div>
+  </nav>
+</header>

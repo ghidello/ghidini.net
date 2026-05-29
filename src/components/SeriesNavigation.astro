@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  currentPost: CollectionEntry<'blog'>;
+}
+
+const { currentPost } = Astro.props;
+const { series, seriesOrder } = currentPost.data;
+
+if (!series) return;
+
+const allPosts = await getCollection('blog', ({ data }) => {
+  return data.series === series && !data.draft;
+});
+
+const seriesPosts = allPosts.sort((a, b) => (a.data.seriesOrder ?? 0) - (b.data.seriesOrder ?? 0));
+---
+
+{series && (
+  <aside class="my-8 p-4 rounded-lg border border-(--color-border) bg-(--color-bg-secondary)">
+    <h3 class="text-sm font-semibold uppercase tracking-wide text-(--color-text-secondary) mb-3">
+      Series: {series.replace(/-/g, ' ')}
+    </h3>
+    <ol class="space-y-1">
+      {seriesPosts.map((post) => (
+        <li class="text-sm">
+          {post.id === currentPost.id ? (
+            <span class="font-medium text-(--color-accent)">
+              {post.data.seriesOrder}. {post.data.title} (current)
+            </span>
+          ) : (
+            <a
+              href={`/blog/${post.id}`}
+              class="text-(--color-text-secondary) hover:text-(--color-accent) transition-colors"
+            >
+              {post.data.seriesOrder}. {post.data.title}
+            </a>
+          )}
+        </li>
+      ))}
+    </ol>
+  </aside>
+)}

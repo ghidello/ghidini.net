@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = await getCollection('blog', ({ data }) => !data.draft && data.series);
+
+// Group posts by series
+const seriesMap = new Map<string, typeof posts>();
+for (const post of posts) {
+  const series = post.data.series!;
+  if (!seriesMap.has(series)) {
+    seriesMap.set(series, []);
+  }
+  seriesMap.get(series)!.push(post);
+}
+
+// Sort each series by order
+for (const [, seriesPosts] of seriesMap) {
+  seriesPosts.sort((a, b) => (a.data.seriesOrder ?? 0) - (b.data.seriesOrder ?? 0));
+}
+---
+
+<BaseLayout title="Series - The Flux Capacitor" description="Blog post series">
+  <h1 class="text-3xl font-bold mb-8">Series</h1>
+  
+  {seriesMap.size === 0 ? (
+    <p class="text-(--color-text-secondary)">No series yet. Check back soon!</p>
+  ) : (
+    <div class="space-y-8">
+      {[...seriesMap.entries()].map(([seriesName, seriesPosts]) => (
+        <section class="p-6 rounded-lg border border-(--color-border) bg-(--color-bg-secondary)">
+          <h2 class="text-xl font-bold mb-1 capitalize">{seriesName.replace(/-/g, ' ')}</h2>
+          <p class="text-sm text-(--color-text-secondary) mb-4">{seriesPosts.length} parts</p>
+          <ol class="space-y-2">
+            {seriesPosts.map((post) => (
+              <li>
+                <a
+                  href={`/blog/${post.id}`}
+                  class="flex items-center gap-3 text-(--color-text-secondary) hover:text-(--color-accent) transition-colors"
+                >
+                  <span class="text-sm font-mono text-(--color-accent)">{String(post.data.seriesOrder ?? 0).padStart(2, '0')}</span>
+                  <span>{post.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
+    </div>
+  )}
+</BaseLayout>
