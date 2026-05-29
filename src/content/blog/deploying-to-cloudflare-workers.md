@@ -11,12 +11,12 @@ seriesOrder: 4
 
 For a static blog, the hosting choice comes down to a few things: cost, speed, simplicity, and how much I have to think about it after the initial setup. I evaluated four options:
 
-| Platform         | Free tier                              | Auto-deploy | Edge CDN | Notes                                  |
-| ---------------- | -------------------------------------- | ----------- | -------- | -------------------------------------- |
-| Cloudflare Workers | Unlimited bandwidth, 500 builds/month | Yes         | Yes      | Cookie-free analytics available        |
-| Netlify          | 100GB/month, 300 build min             | Yes         | Yes      | More mature plugin ecosystem           |
-| GitHub Pages     | Unlimited for public repos             | Yes         | Limited  | No redirects, no analytics, simplest   |
-| Vercel           | 100GB/month, 6000 min                  | Yes         | Yes      | Next.js-focused, overkill for static   |
+| Platform           | Free tier                             | Auto-deploy | Edge CDN | Notes                                |
+| ------------------ | ------------------------------------- | ----------- | -------- | ------------------------------------ |
+| Cloudflare Workers | Unlimited bandwidth, 500 builds/month | Yes         | Yes      | Cookie-free analytics available      |
+| Netlify            | 100GB/month, 300 build min            | Yes         | Yes      | More mature plugin ecosystem         |
+| GitHub Pages       | Unlimited for public repos            | Yes         | Limited  | No redirects, no analytics, simplest |
+| Vercel             | 100GB/month, 6000 min                 | Yes         | Yes      | Next.js-focused, overkill for static |
 
 **Cloudflare won** because:
 
@@ -52,8 +52,8 @@ I created a `wrangler.jsonc` at the project root:
   "compatibility_date": "2026-05-29",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "404-page"
-  }
+    "not_found_handling": "404-page",
+  },
 }
 ```
 
