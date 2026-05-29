@@ -9,9 +9,9 @@ seriesOrder: 3
 
 ## Standing on the Shoulders of Giants
 
-After getting the blog running with linting and formatting in place, I did what any sensible developer does — I looked at how the Astro team built *their* example blog. The [official Astro blog template](https://github.com/withastro/astro/tree/main/examples/blog) is listed as an example in the Astro docs, and it's surprisingly instructive.
+After getting the blog running with linting and formatting in place, I did what any sensible developer does — I looked at how the Astro team built _their_ example blog. The [official Astro blog template](https://github.com/withastro/astro/tree/main/examples/blog) is listed as an example in the Astro docs, and it's surprisingly instructive.
 
-Here's what I stole — er, *learned* — and applied to this blog.
+Here's what I stole — er, _learned_ — and applied to this blog.
 
 ## 1. RSS Feed with `@astrojs/rss`
 
@@ -67,7 +67,7 @@ export const SITE_URL = 'https://ghidini.net';
 Now every page imports and interpolates:
 
 ```astro
-<BaseLayout title={`Blog - ${SITE_TITLE}`}>
+<BaseLayout title={`Blog - ${SITE_TITLE}`} />
 ```
 
 One rename, one file to change. DRY wins.
@@ -121,6 +121,6 @@ Both are tracked in `TODO.md` for when they become relevant.
 
 ## Takeaways
 
-Studying reference implementations is underrated. In about 30 minutes of reading the official example, I identified five concrete improvements. The RSS feed alone makes the blog meaningfully more useful — it's how *I* follow other blogs, so it would be hypocritical not to offer one.
+Studying reference implementations is underrated. In about 30 minutes of reading the official example, I identified five concrete improvements. The RSS feed alone makes the blog meaningfully more useful — it's how _I_ follow other blogs, so it would be hypocritical not to offer one.
 
 The pattern here is simple: build something, then look at how experienced people built the same thing. You'll always find something you missed.
