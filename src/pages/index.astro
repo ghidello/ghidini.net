@@ -1,12 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FormattedDate from '../components/FormattedDate.astro';
+import PostCard from '../components/PostCard.astro';
 import { SITE_TITLE } from '../consts';
+import { getSortedBlogPosts } from '../utils/collections';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = await getSortedBlogPosts();
 
 // Group series
 const seriesMap = new Map<string, { title: string; count: number }>();
@@ -79,34 +77,7 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
         ) : (
           <div class="space-y-12">
             {posts.map((post) => (
-              <article class="group">
-                <div class="mb-3 flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-widest text-(--color-muted-foreground) uppercase">
-                  <FormattedDate date={post.data.pubDate} />
-                  {post.data.series && (
-                    <>
-                      <span class="text-(--color-primary)">&bull;</span>
-                      <span>Series: {post.data.series.replace(/-/g, ' ')}</span>
-                    </>
-                  )}
-                </div>
-                <a href={`/blog/${post.id}`} class="block">
-                  <h3 class="mb-4 text-2xl font-bold text-(--color-foreground) transition-colors group-hover:text-(--color-primary) md:text-3xl">
-                    {post.data.title}
-                  </h3>
-                </a>
-                <p class="mb-6 leading-relaxed text-(--color-muted-foreground)">
-                  {post.data.description}
-                </p>
-                {post.data.tags.length > 0 && (
-                  <div class="flex flex-wrap gap-2">
-                    {post.data.tags.map((tag) => (
-                      <span class="border border-(--color-border) bg-(--color-surface) px-2 py-1 font-mono text-[10px] text-(--color-muted-foreground)">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </article>
+              <PostCard post={post} headingLevel="h3" />
             ))}
           </div>
         )

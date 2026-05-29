@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
 import { SITE_TITLE } from '../../consts';
 
 const posts = await getCollection('blog', ({ data }) => !data.draft && data.series);
@@ -22,16 +23,11 @@ for (const [, seriesPosts] of seriesMap) {
 ---
 
 <BaseLayout title={`Series - ${SITE_TITLE}`} description="Blog post series">
-  <div class="mb-12">
-    <div class="mb-4 font-mono text-xs tracking-widest text-(--color-primary) uppercase">
-      // CONNECTED_THREADS
-    </div>
-    <h1 class="mb-4 text-5xl font-extrabold tracking-tight text-(--color-foreground)">Series</h1>
-    <p class="max-w-2xl text-lg text-(--color-muted-foreground)">
-      Some topics are too big for one post. These are the multi-parters — ordered, indexed, and
-      ready to binge.
-    </p>
-  </div>
+  <PageHeader
+    label="// CONNECTED_THREADS"
+    title="Series"
+    description="Some topics are too big for one post. These are the multi-parters — ordered, indexed, and ready to binge."
+  />
 
   {
     seriesMap.size === 0 ? (

@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
+import BackLink from '../../components/BackLink.astro';
 import { SITE_TITLE } from '../../consts';
 
 export async function getStaticPaths() {
@@ -19,12 +20,7 @@ const { Content } = await render(guide);
 
 <BaseLayout title={`${title} - ${SITE_TITLE}`} description={description}>
   <article class="mx-auto max-w-3xl">
-    <a
-      href="/guides"
-      class="mb-8 inline-block font-mono text-xs tracking-widest text-(--color-muted-foreground) uppercase hover:text-(--color-primary)"
-    >
-      &larr; All guides
-    </a>
+    <BackLink href="/guides" label="All guides" />
 
     <header class="mb-12 border-b border-(--color-border) pb-8">
       <div

@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
+import BackLink from '../../components/BackLink.astro';
 import { SITE_TITLE } from '../../consts';
 
 export async function getStaticPaths() {
@@ -23,12 +24,7 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout title={`#${tag} - ${SITE_TITLE}`} description={`Posts tagged with #${tag}`}>
-  <a
-    href="/"
-    class="mb-8 inline-block font-mono text-xs tracking-widest text-(--color-muted-foreground) uppercase hover:text-(--color-primary)"
-  >
-    ← Home
-  </a>
+  <BackLink href="/" label="Home" />
 
   <div class="mb-12">
     <div class="mb-2 font-mono text-xs tracking-widest text-(--color-primary) uppercase">
