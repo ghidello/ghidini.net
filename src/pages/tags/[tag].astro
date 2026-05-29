@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE } from '../../consts';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      posts: posts
+        .filter((p) => p.data.tags.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout title={`#${tag} - ${SITE_TITLE}`} description={`Posts tagged with #${tag}`}>
+  <a
+    href="/"
+    class="mb-8 inline-block font-mono text-xs tracking-widest text-(--color-muted-foreground) uppercase hover:text-(--color-primary)"
+  >
+    ← Home
+  </a>
+
+  <div class="mb-12">
+    <div class="mb-2 font-mono text-xs tracking-widest text-(--color-primary) uppercase">
+      // Tag · {String(posts.length).padStart(2, '0')} posts
+    </div>
+    <h1 class="text-4xl font-extrabold tracking-tight text-(--color-foreground)">#{tag}</h1>
+  </div>
+
+  <div class="space-y-8">
+    {
+      posts.map((post) => (
+        <article class="group">
+          <div class="mb-2 flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-widest text-(--color-muted-foreground) uppercase">
+            <FormattedDate date={post.data.pubDate} />
+            {post.data.series && (
+              <>
+                <span class="text-(--color-primary)">•</span>
+                <span>Series: {post.data.series.replace(/-/g, ' ')}</span>
+              </>
+            )}
+          </div>
+          <a href={`/blog/${post.id}`} class="block">
+            <h2 class="mb-2 text-xl font-bold text-(--color-foreground) transition-colors group-hover:text-(--color-primary)">
+              {post.data.title}
+            </h2>
+          </a>
+          {post.data.description && (
+            <p class="text-sm leading-relaxed text-(--color-muted-foreground)">
+              {post.data.description}
+            </p>
+          )}
+        </article>
+      ))
+    }
+  </div>
+</BaseLayout>

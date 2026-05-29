@@ -150,9 +150,12 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
         <div class="flex flex-wrap gap-2">
           {
             allTags.map((tag) => (
-              <span class="border border-(--color-border) bg-(--color-surface) px-2 py-1 font-mono text-[10px] tracking-widest text-(--color-muted-foreground) uppercase">
+              <a
+                href={`/tags/${tag}`}
+                class="border border-(--color-border) bg-(--color-surface) px-2 py-1 font-mono text-[10px] tracking-widest text-(--color-muted-foreground) uppercase transition-colors hover:border-(--color-primary) hover:text-(--color-primary)"
+              >
                 {tag}
-              </span>
+              </a>
             ))
           }
         </div>
