@@ -20,6 +20,9 @@ for (const post of posts) {
   }
 }
 const series = [...seriesMap.entries()];
+
+// Collect unique tags
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
 ---
 
 <BaseLayout title={`${SITE_TITLE} — Software Development Blog`}>
@@ -124,7 +127,7 @@ const series = [...seriesMap.entries()];
               <p class="font-mono text-xs text-(--color-muted-foreground)">No series yet.</p>
             ) : (
               series.map(([id, s]) => (
-                <a href="/series" class="group block">
+                <a href={`/series/${id}`} class="group block">
                   <div class="mb-1 font-mono text-xs tracking-widest text-(--color-accent) uppercase">
                     {String(s.count).padStart(2, '0')} parts
                   </div>
@@ -136,6 +139,35 @@ const series = [...seriesMap.entries()];
             )
           }
         </div>
+      </section>
+
+      <section class="border border-(--color-border) bg-(--color-surface)/30 p-6">
+        <h2
+          class="mb-6 font-mono text-xs font-bold tracking-widest text-(--color-foreground) uppercase"
+        >
+          Stack Reference
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          {
+            allTags.map((tag) => (
+              <span class="border border-(--color-border) bg-(--color-surface) px-2 py-1 font-mono text-[10px] tracking-widest text-(--color-muted-foreground) uppercase">
+                {tag}
+              </span>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="border border-(--color-border) bg-(--color-surface)/30 p-6">
+        <h2
+          class="mb-4 font-mono text-xs font-bold tracking-widest text-(--color-foreground) uppercase"
+        >
+          About this site
+        </h2>
+        <p class="text-sm leading-relaxed text-(--color-muted-foreground)">
+          Notes from an engineer's lab notebook. Mostly for me, possibly useful to you. Built on
+          Astro. Powered by 1.21 gigawatts.
+        </p>
       </section>
     </aside>
   </div>
