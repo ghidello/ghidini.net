@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE } from '../../consts';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft && data.series);
+
+  const seriesMap = new Map<string, typeof posts>();
+  for (const post of posts) {
+    const series = post.data.series!;
+    if (!seriesMap.has(series)) {
+      seriesMap.set(series, []);
+    }
+    seriesMap.get(series)!.push(post);
+  }
+
+  return [...seriesMap.entries()].map(([slug, seriesPosts]) => ({
+    params: { slug },
+    props: {
+      seriesPosts: seriesPosts.sort(
+        (a, b) => (a.data.seriesOrder ?? 0) - (b.data.seriesOrder ?? 0),
+      ),
+    },
+  }));
+}
+
+const { slug } = Astro.params;
+const { seriesPosts } = Astro.props;
+const title = slug!.replace(/-/g, ' ');
+---
+
+<BaseLayout title={`${title} - ${SITE_TITLE}`} description={`Series: ${title}`}>
+  <a
+    href="/series"
+    class="mb-8 inline-block font-mono text-xs tracking-widest text-(--color-muted-foreground) uppercase hover:text-(--color-primary)"
+  >
+    ← All series
+  </a>
+
+  <div class="mb-8 border-b border-(--color-border) pb-4">
+    <div class="mb-2 font-mono text-xs tracking-widest text-(--color-primary) uppercase">
+      // Series · {String(seriesPosts.length).padStart(2, '0')} parts
+    </div>
+    <h1 class="text-3xl font-bold text-(--color-foreground) capitalize">
+      {title}
+    </h1>
+  </div>
+
+  <ol class="space-y-4">
+    {
+      seriesPosts.map((post) => (
+        <li>
+          <a
+            href={`/blog/${post.id}`}
+            class="grid grid-cols-[2rem_1fr_auto] items-baseline gap-4 border border-(--color-border) bg-(--color-surface)/30 p-4 transition-colors hover:border-(--color-primary)/50"
+          >
+            <span class="font-mono text-sm text-(--color-muted-foreground)">
+              {String(post.data.seriesOrder ?? 0).padStart(2, '0')}
+            </span>
+            <div>
+              <span class="font-medium text-(--color-foreground)">{post.data.title}</span>
+              {post.data.description && (
+                <p class="mt-1 text-sm text-(--color-muted-foreground)">{post.data.description}</p>
+              )}
+            </div>
+            <span class="font-mono text-xs text-(--color-muted-foreground)">
+              <FormattedDate date={post.data.pubDate} format="short" />
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</BaseLayout>

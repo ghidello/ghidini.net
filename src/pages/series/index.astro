@@ -32,31 +32,32 @@ for (const [, seriesPosts] of seriesMap) {
     seriesMap.size === 0 ? (
       <p class="text-(--color-muted-foreground)">No series yet. Check back soon!</p>
     ) : (
-      <div class="space-y-10">
+      <div class="grid gap-6 sm:grid-cols-2">
         {[...seriesMap.entries()].map(([seriesName, seriesPosts]) => (
-          <section class="border border-(--color-border) bg-(--color-surface)/30 p-6">
-            <div class="mb-4 font-mono text-xs tracking-widest text-(--color-primary) uppercase">
-              {seriesPosts.length} parts
+          <a
+            href={`/series/${seriesName}`}
+            class="group border border-(--color-border) bg-(--color-surface)/30 p-6 transition-colors hover:border-(--color-primary)/50"
+          >
+            <div class="mb-2 font-mono text-xs tracking-widest text-(--color-primary) uppercase">
+              // Series · {String(seriesPosts.length).padStart(2, '0')} parts
             </div>
-            <h2 class="mb-6 text-xl font-bold text-(--color-foreground) capitalize">
+            <h2 class="mb-3 text-xl font-bold text-(--color-foreground) capitalize group-hover:text-(--color-primary)">
               {seriesName.replace(/-/g, ' ')}
             </h2>
-            <ol class="space-y-2">
-              {seriesPosts.map((post) => (
-                <li class="flex gap-3 font-mono text-sm">
-                  <span class="text-(--color-muted-foreground)">
-                    {String(post.data.seriesOrder ?? 0).padStart(2, '0')}.
-                  </span>
-                  <a
-                    href={`/blog/${post.id}`}
-                    class="text-(--color-foreground) hover:text-(--color-primary)"
-                  >
-                    {post.data.title}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </section>
+            <p class="text-sm text-(--color-muted-foreground)">
+              Starts with {seriesPosts[0].data.title}
+            </p>
+            <div class="mt-4 flex items-center justify-between font-mono text-xs text-(--color-muted-foreground)">
+              <span>
+                Latest:{' '}
+                {seriesPosts[seriesPosts.length - 1].data.pubDate.toLocaleDateString('en-US', {
+                  month: 'short',
+                  year: 'numeric',
+                })}
+              </span>
+              <span class="text-(--color-primary)">READ →</span>
+            </div>
+          </a>
         ))}
       </div>
     )
