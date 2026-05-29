@@ -1,47 +1,57 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:where(.dark, .dark *));
+/*
+ * The Flux Capacitor — retro technical lab.
+ * Dark-only design with cyan + plutonium-orange accents.
+ * All semantic colors use oklch.
+ */
 
 @theme {
-  --color-bg: #ffffff;
-  --color-bg-secondary: #f8fafc;
-  --color-text: #1e293b;
-  --color-text-secondary: #64748b;
-  --color-border: #e2e8f0;
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-code-bg: #f1f5f9;
-  --color-surface: #ffffff;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
 @layer base {
   :root {
-    color-scheme: light;
-  }
+    /* #0a0a0c — deep ink */
+    --background: oklch(0.16 0.005 270);
+    /* #121217 — surface */
+    --surface: oklch(0.205 0.008 270);
+    /* near-white text */
+    --foreground: oklch(0.96 0.005 270);
+    /* slate-400 */
+    --muted-foreground: oklch(0.72 0.015 260);
+    --muted: oklch(0.27 0.012 265);
+    /* #1f2937 — border */
+    --border: oklch(0.32 0.018 260);
 
-  :root.dark {
+    /* #00f3ff — gigawatt cyan */
+    --primary: oklch(0.86 0.16 200);
+    /* #ff5f1f — plutonium orange */
+    --accent: oklch(0.69 0.21 38);
+
     color-scheme: dark;
-    --color-bg: #0f172a;
-    --color-bg-secondary: #1e293b;
-    --color-text: #e2e8f0;
-    --color-text-secondary: #94a3b8;
-    --color-border: #334155;
-    --color-accent: #60a5fa;
-    --color-accent-hover: #93c5fd;
-    --color-code-bg: #1e293b;
-    --color-surface: #1e293b;
   }
 
-  html {
-    font-family:
-      system-ui,
-      -apple-system,
-      sans-serif;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease;
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
   }
 
   body {
@@ -49,4 +59,147 @@
     display: flex;
     flex-direction: column;
   }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--primary) 35%, transparent);
+    color: var(--primary);
+  }
+}
+
+/* Markdown / prose styles */
+.prose-flux {
+  font-family: var(--font-sans);
+  color: var(--color-foreground);
+  line-height: 1.75;
+}
+.prose-flux > * + * {
+  margin-top: 1.25em;
+}
+.prose-flux h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 2.5em;
+  margin-bottom: 0.5em;
+  color: var(--color-foreground);
+  scroll-margin-top: 6rem;
+}
+.prose-flux h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 0.4em;
+  color: var(--color-foreground);
+  scroll-margin-top: 6rem;
+}
+.prose-flux h4 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-top: 1.6em;
+}
+.prose-flux p {
+  color: color-mix(in oklab, var(--foreground) 88%, transparent);
+}
+.prose-flux a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--primary) 40%, transparent);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s;
+}
+.prose-flux a:hover {
+  text-decoration-color: var(--color-primary);
+}
+.prose-flux strong {
+  color: var(--color-foreground);
+  font-weight: 700;
+}
+.prose-flux em {
+  color: var(--color-foreground);
+}
+
+.prose-flux ul,
+.prose-flux ol {
+  padding-left: 1.5em;
+}
+.prose-flux ul {
+  list-style: disc;
+}
+.prose-flux ol {
+  list-style: decimal;
+}
+.prose-flux li {
+  margin-top: 0.4em;
+  color: color-mix(in oklab, var(--foreground) 88%, transparent);
+}
+.prose-flux li::marker {
+  color: var(--color-primary);
+}
+
+.prose-flux blockquote {
+  border-left: 2px solid color-mix(in oklab, var(--primary) 40%, transparent);
+  background: color-mix(in oklab, var(--primary) 6%, transparent);
+  padding: 1rem 1.25rem;
+  font-style: italic;
+  color: var(--color-muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+}
+
+.prose-flux code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 0.1em 0.4em;
+  border-radius: 0.25rem;
+  color: var(--color-foreground);
+}
+.prose-flux pre {
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+.prose-flux pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+.prose-flux table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  border: 1px solid var(--color-border);
+}
+.prose-flux th,
+.prose-flux td {
+  border: 1px solid var(--color-border);
+  padding: 0.65rem 0.85rem;
+  text-align: left;
+}
+.prose-flux th {
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-foreground);
+}
+.prose-flux td {
+  color: color-mix(in oklab, var(--foreground) 85%, transparent);
+}
+.prose-flux tbody tr:nth-child(even) {
+  background: color-mix(in oklab, var(--surface) 50%, transparent);
+}
+
+.prose-flux hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: 3em 0;
 }

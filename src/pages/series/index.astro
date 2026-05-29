@@ -22,28 +22,36 @@ for (const [, seriesPosts] of seriesMap) {
 ---
 
 <BaseLayout title={`Series - ${SITE_TITLE}`} description="Blog post series">
-  <h1 class="mb-8 text-3xl font-bold">Series</h1>
+  <div class="mb-8 border-b border-(--color-border) pb-4">
+    <h1 class="font-mono text-sm font-bold tracking-widest text-(--color-foreground) uppercase">
+      Series Index
+    </h1>
+  </div>
 
   {
     seriesMap.size === 0 ? (
-      <p class="text-(--color-text-secondary)">No series yet. Check back soon!</p>
+      <p class="text-(--color-muted-foreground)">No series yet. Check back soon!</p>
     ) : (
-      <div class="space-y-8">
+      <div class="space-y-10">
         {[...seriesMap.entries()].map(([seriesName, seriesPosts]) => (
-          <section class="rounded-lg border border-(--color-border) bg-(--color-bg-secondary) p-6">
-            <h2 class="mb-1 text-xl font-bold capitalize">{seriesName.replace(/-/g, ' ')}</h2>
-            <p class="mb-4 text-sm text-(--color-text-secondary)">{seriesPosts.length} parts</p>
+          <section class="border border-(--color-border) bg-(--color-surface)/30 p-6">
+            <div class="mb-4 font-mono text-xs tracking-widest text-(--color-primary) uppercase">
+              {seriesPosts.length} parts
+            </div>
+            <h2 class="mb-6 text-xl font-bold text-(--color-foreground) capitalize">
+              {seriesName.replace(/-/g, ' ')}
+            </h2>
             <ol class="space-y-2">
               {seriesPosts.map((post) => (
-                <li>
+                <li class="flex gap-3 font-mono text-sm">
+                  <span class="text-(--color-muted-foreground)">
+                    {String(post.data.seriesOrder ?? 0).padStart(2, '0')}.
+                  </span>
                   <a
                     href={`/blog/${post.id}`}
-                    class="flex items-center gap-3 text-(--color-text-secondary) transition-colors hover:text-(--color-accent)"
+                    class="text-(--color-foreground) hover:text-(--color-primary)"
                   >
-                    <span class="font-mono text-sm text-(--color-accent)">
-                      {String(post.data.seriesOrder ?? 0).padStart(2, '0')}
-                    </span>
-                    <span>{post.data.title}</span>
+                    {post.data.title}
                   </a>
                 </li>
               ))}

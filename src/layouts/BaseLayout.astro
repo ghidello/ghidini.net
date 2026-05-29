@@ -15,7 +15,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,6 +29,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Primary Meta Tags -->
     <title>{title}</title>
@@ -48,23 +56,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     {image && <meta property="twitter:image" content={new URL(image, Astro.site)} />}
-
-    <!-- Theme detection script (runs before render to avoid flash) -->
-    <script is:inline>
-      (function () {
-        const stored = localStorage.getItem('theme');
-        if (
-          stored === 'dark' ||
-          (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
-        ) {
-          document.documentElement.classList.add('dark');
-        }
-      })();
-    </script>
   </head>
-  <body class="bg-(--color-bg) text-(--color-text)">
+  <body>
     <Header />
-    <main class="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+    <main class="mx-auto w-full max-w-5xl flex-1 px-6 py-16">
       <slot />
     </main>
     <Footer />

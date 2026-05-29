@@ -1,42 +1,46 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
+const NAV = [
+  { label: 'Blog', href: '/blog' },
+  { label: 'Guides', href: '/guides' },
+  { label: 'Series', href: '/series' },
+];
+const pathname = Astro.url.pathname;
 ---
 
-<header
-  class="sticky top-0 z-50 border-b border-(--color-border) bg-(--color-bg)/80 backdrop-blur-sm"
+<nav
+  class="sticky top-0 z-50 border-b border-(--color-border) bg-(--color-background)/80 px-6 py-4 backdrop-blur-md"
 >
-  <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
-    <a
-      href="/"
-      class="flex items-center gap-2 text-xl font-bold text-(--color-accent) transition-colors hover:text-(--color-accent-hover)"
-    >
-      <img
-        src="/favicon.svg"
-        alt="The Flux Capacitor logo"
-        class="h-9 w-9 rounded-full ring-2 ring-(--color-accent)/30"
-      />
-      The Flux Capacitor
+  <div class="mx-auto flex max-w-5xl items-center justify-between">
+    <a href="/" class="group flex items-center gap-3">
+      <div
+        class="flex size-8 items-center justify-center rounded border border-(--color-primary)/40 bg-(--color-primary)/10"
+      >
+        <div class="size-2 animate-pulse rounded-full bg-(--color-primary)"></div>
+      </div>
+      <span
+        class="font-mono text-lg font-bold tracking-tighter text-(--color-foreground) italic transition-colors group-hover:text-(--color-primary)"
+      >
+        THE FLUX CAPACITOR
+      </span>
     </a>
-    <div class="flex items-center gap-6">
-      <a
-        href="/blog"
-        class="text-(--color-text-secondary) transition-colors hover:text-(--color-text)"
-      >
-        Blog
-      </a>
-      <a
-        href="/guides"
-        class="text-(--color-text-secondary) transition-colors hover:text-(--color-text)"
-      >
-        Guides
-      </a>
-      <a
-        href="/series"
-        class="text-(--color-text-secondary) transition-colors hover:text-(--color-text)"
-      >
-        Series
-      </a>
-      <ThemeToggle />
+    <div class="hidden gap-8 font-mono text-xs tracking-widest uppercase md:flex">
+      {
+        NAV.map((item, idx) => {
+          const active = pathname === item.href || pathname.startsWith(item.href + '/');
+          return (
+            <a
+              href={item.href}
+              class={
+                active
+                  ? 'text-(--color-primary)'
+                  : 'text-(--color-muted-foreground) transition-colors hover:text-(--color-primary)'
+              }
+            >
+              [{String(idx + 1).padStart(2, '0')}] {item.label}
+            </a>
+          );
+        })
+      }
     </div>
-  </nav>
-</header>
+  </div>
+</nav>

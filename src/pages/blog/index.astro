@@ -10,42 +10,48 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 ---
 
 <BaseLayout title={`Blog - ${SITE_TITLE}`} description="All blog posts">
-  <h1 class="mb-8 text-3xl font-bold">All Posts</h1>
+  <div class="mb-8 border-b border-(--color-border) pb-4">
+    <h1 class="font-mono text-sm font-bold tracking-widest text-(--color-foreground) uppercase">
+      All Transmissions
+    </h1>
+  </div>
 
   {
     posts.length === 0 ? (
-      <p class="text-(--color-text-secondary)">No posts yet. Check back soon!</p>
+      <p class="text-(--color-muted-foreground)">No posts yet. Check back soon!</p>
     ) : (
-      <ul class="space-y-6">
+      <div class="space-y-12">
         {posts.map((post) => (
-          <li>
-            <a
-              href={`/blog/${post.id}`}
-              class="group -mx-4 block rounded-lg p-4 transition-colors hover:bg-(--color-bg-secondary)"
-            >
-              <h2 class="text-xl font-semibold transition-colors group-hover:text-(--color-accent)">
+          <article class="group">
+            <div class="mb-3 flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-widest text-(--color-muted-foreground) uppercase">
+              <FormattedDate date={post.data.pubDate} />
+              {post.data.series && (
+                <>
+                  <span class="text-(--color-primary)">&bull;</span>
+                  <span>Series: {post.data.series.replace(/-/g, ' ')}</span>
+                </>
+              )}
+            </div>
+            <a href={`/blog/${post.id}`} class="block">
+              <h2 class="mb-4 text-2xl font-bold text-(--color-foreground) transition-colors group-hover:text-(--color-primary) md:text-3xl">
                 {post.data.title}
               </h2>
-              <p class="mt-1 text-(--color-text-secondary)">{post.data.description}</p>
-              <div class="mt-2 flex flex-wrap items-center gap-3 text-sm text-(--color-text-secondary)">
-                <FormattedDate date={post.data.pubDate} />
-                {post.data.series && (
-                  <span class="rounded-full bg-(--color-accent)/10 px-2 py-0.5 text-xs text-(--color-accent)">
-                    Series: {post.data.series.replace(/-/g, ' ')}
-                  </span>
-                )}
-                {post.data.tags.length > 0 && (
-                  <div class="flex gap-1">
-                    {post.data.tags.map((tag) => (
-                      <span class="text-xs text-(--color-text-secondary)">#{tag}</span>
-                    ))}
-                  </div>
-                )}
-              </div>
             </a>
-          </li>
+            <p class="mb-6 leading-relaxed text-(--color-muted-foreground)">
+              {post.data.description}
+            </p>
+            {post.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                {post.data.tags.map((tag) => (
+                  <span class="border border-(--color-border) bg-(--color-surface) px-2 py-1 font-mono text-[10px] text-(--color-muted-foreground)">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </article>
         ))}
-      </ul>
+      </div>
     )
   }
 </BaseLayout>

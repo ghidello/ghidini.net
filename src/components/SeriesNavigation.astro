@@ -19,28 +19,32 @@ const seriesPosts = allPosts.sort((a, b) => (a.data.seriesOrder ?? 0) - (b.data.
 ---
 
 {
-  series && (
-    <aside class="my-8 rounded-lg border border-(--color-border) bg-(--color-bg-secondary) p-4">
-      <h3 class="mb-3 text-sm font-semibold tracking-wide text-(--color-text-secondary) uppercase">
-        Series: {series.replace(/-/g, ' ')}
-      </h3>
-      <ol class="space-y-1">
-        {seriesPosts.map((post) => (
-          <li class="text-sm">
-            {post.id === currentPost.id ? (
-              <span class="font-medium text-(--color-accent)">
-                {post.data.seriesOrder}. {post.data.title} (current)
+  series && seriesPosts.length > 1 && (
+    <aside class="mt-16 border border-(--color-border) bg-(--color-surface)/30 p-6">
+      <div class="mb-4 font-mono text-xs tracking-widest text-(--color-primary) uppercase">
+        Series · {series.replace(/-/g, ' ')}
+      </div>
+      <ol class="space-y-2">
+        {seriesPosts.map((post) => {
+          const current = post.id === currentPost.id;
+          return (
+            <li class="flex gap-3 font-mono text-sm">
+              <span class="text-(--color-muted-foreground)">
+                {String(post.data.seriesOrder ?? 0).padStart(2, '0')}.
               </span>
-            ) : (
-              <a
-                href={`/blog/${post.id}`}
-                class="text-(--color-text-secondary) transition-colors hover:text-(--color-accent)"
-              >
-                {post.data.seriesOrder}. {post.data.title}
-              </a>
-            )}
-          </li>
-        ))}
+              {current ? (
+                <span class="text-(--color-primary)">{post.data.title}</span>
+              ) : (
+                <a
+                  href={`/blog/${post.id}`}
+                  class="text-(--color-foreground) hover:text-(--color-primary)"
+                >
+                  {post.data.title}
+                </a>
+              )}
+            </li>
+          );
+        })}
       </ol>
     </aside>
   )

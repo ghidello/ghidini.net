@@ -20,39 +20,43 @@ for (const guide of guides) {
 ---
 
 <BaseLayout title={`Guides - ${SITE_TITLE}`} description="Quick reference guides and cheatsheets">
-  <h1 class="mb-2 text-3xl font-bold">Guides</h1>
-  <p class="mb-8 text-(--color-text-secondary)">
-    Quick reference cheatsheets and commands I always forget.
-  </p>
+  <div class="mb-8 border-b border-(--color-border) pb-4">
+    <h1 class="font-mono text-sm font-bold tracking-widest text-(--color-foreground) uppercase">
+      Reference Manuals
+    </h1>
+    <p class="mt-2 text-sm text-(--color-muted-foreground)">
+      Quick reference cheatsheets and commands I always forget.
+    </p>
+  </div>
 
   {
     topicMap.size === 0 ? (
-      <p class="text-(--color-text-secondary)">No guides yet. Check back soon!</p>
+      <p class="text-(--color-muted-foreground)">No guides yet. Check back soon!</p>
     ) : (
-      <div class="space-y-8">
+      <div class="space-y-10">
         {[...topicMap.entries()].map(([topic, topicGuides]) => (
           <section>
-            <h2 class="mb-3 text-lg font-semibold text-(--color-accent) capitalize">{topic}</h2>
-            <ul class="space-y-2">
+            <h2 class="mb-4 font-mono text-xs font-bold tracking-widest text-(--color-accent) uppercase">
+              {topic}
+            </h2>
+            <div class="space-y-2">
               {topicGuides.map((guide) => (
-                <li>
-                  <a
-                    href={`/guides/${guide.id}`}
-                    class="group -mx-3 flex items-baseline justify-between rounded-lg p-3 transition-colors hover:bg-(--color-bg-secondary)"
-                  >
-                    <span class="font-medium transition-colors group-hover:text-(--color-accent)">
-                      {guide.data.title}
-                    </span>
-                    <span class="ml-2 shrink-0 text-xs text-(--color-text-secondary)">
-                      <FormattedDate
-                        date={guide.data.updatedDate ?? guide.data.pubDate}
-                        format="month-year"
-                      />
-                    </span>
-                  </a>
-                </li>
+                <a
+                  href={`/guides/${guide.id}`}
+                  class="group flex items-baseline justify-between border border-(--color-border) bg-(--color-surface)/30 p-4 transition-colors hover:border-(--color-primary)/40"
+                >
+                  <span class="font-medium text-(--color-foreground) transition-colors group-hover:text-(--color-primary)">
+                    {guide.data.title}
+                  </span>
+                  <span class="ml-2 shrink-0 font-mono text-[10px] text-(--color-muted-foreground)">
+                    <FormattedDate
+                      date={guide.data.updatedDate ?? guide.data.pubDate}
+                      format="month-year"
+                    />
+                  </span>
+                </a>
               ))}
-            </ul>
+            </div>
           </section>
         ))}
       </div>
