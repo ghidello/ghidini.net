@@ -21,31 +21,35 @@ for (const [, seriesPosts] of seriesMap) {
 ---
 
 <BaseLayout title="Series - The Flux Capacitor" description="Blog post series">
-  <h1 class="text-3xl font-bold mb-8">Series</h1>
-  
-  {seriesMap.size === 0 ? (
-    <p class="text-(--color-text-secondary)">No series yet. Check back soon!</p>
-  ) : (
-    <div class="space-y-8">
-      {[...seriesMap.entries()].map(([seriesName, seriesPosts]) => (
-        <section class="p-6 rounded-lg border border-(--color-border) bg-(--color-bg-secondary)">
-          <h2 class="text-xl font-bold mb-1 capitalize">{seriesName.replace(/-/g, ' ')}</h2>
-          <p class="text-sm text-(--color-text-secondary) mb-4">{seriesPosts.length} parts</p>
-          <ol class="space-y-2">
-            {seriesPosts.map((post) => (
-              <li>
-                <a
-                  href={`/blog/${post.id}`}
-                  class="flex items-center gap-3 text-(--color-text-secondary) hover:text-(--color-accent) transition-colors"
-                >
-                  <span class="text-sm font-mono text-(--color-accent)">{String(post.data.seriesOrder ?? 0).padStart(2, '0')}</span>
-                  <span>{post.data.title}</span>
-                </a>
-              </li>
-            ))}
-          </ol>
-        </section>
-      ))}
-    </div>
-  )}
+  <h1 class="mb-8 text-3xl font-bold">Series</h1>
+
+  {
+    seriesMap.size === 0 ? (
+      <p class="text-(--color-text-secondary)">No series yet. Check back soon!</p>
+    ) : (
+      <div class="space-y-8">
+        {[...seriesMap.entries()].map(([seriesName, seriesPosts]) => (
+          <section class="rounded-lg border border-(--color-border) bg-(--color-bg-secondary) p-6">
+            <h2 class="mb-1 text-xl font-bold capitalize">{seriesName.replace(/-/g, ' ')}</h2>
+            <p class="mb-4 text-sm text-(--color-text-secondary)">{seriesPosts.length} parts</p>
+            <ol class="space-y-2">
+              {seriesPosts.map((post) => (
+                <li>
+                  <a
+                    href={`/blog/${post.id}`}
+                    class="flex items-center gap-3 text-(--color-text-secondary) transition-colors hover:text-(--color-accent)"
+                  >
+                    <span class="font-mono text-sm text-(--color-accent)">
+                      {String(post.data.seriesOrder ?? 0).padStart(2, '0')}
+                    </span>
+                    <span>{post.data.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </section>
+        ))}
+      </div>
+    )
+  }
 </BaseLayout>

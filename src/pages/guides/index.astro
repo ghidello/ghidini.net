@@ -2,8 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const guides = (await getCollection('guides', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const guides = (await getCollection('guides', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 
 // Group by topic
 const topicMap = new Map<string, typeof guides>();
@@ -16,41 +17,51 @@ for (const guide of guides) {
 }
 ---
 
-<BaseLayout title="Guides - The Flux Capacitor" description="Quick reference guides and cheatsheets">
-  <h1 class="text-3xl font-bold mb-2">Guides</h1>
-  <p class="text-(--color-text-secondary) mb-8">
+<BaseLayout
+  title="Guides - The Flux Capacitor"
+  description="Quick reference guides and cheatsheets"
+>
+  <h1 class="mb-2 text-3xl font-bold">Guides</h1>
+  <p class="mb-8 text-(--color-text-secondary)">
     Quick reference cheatsheets and commands I always forget.
   </p>
 
-  {topicMap.size === 0 ? (
-    <p class="text-(--color-text-secondary)">No guides yet. Check back soon!</p>
-  ) : (
-    <div class="space-y-8">
-      {[...topicMap.entries()].map(([topic, topicGuides]) => (
-        <section>
-          <h2 class="text-lg font-semibold mb-3 capitalize text-(--color-accent)">{topic}</h2>
-          <ul class="space-y-2">
-            {topicGuides.map((guide) => (
-              <li>
-                <a
-                  href={`/guides/${guide.id}`}
-                  class="group flex items-baseline justify-between p-3 -mx-3 rounded-lg hover:bg-(--color-bg-secondary) transition-colors"
-                >
-                  <span class="font-medium group-hover:text-(--color-accent) transition-colors">
-                    {guide.data.title}
-                  </span>
-                  <span class="text-xs text-(--color-text-secondary) ml-2 shrink-0">
-                    {guide.data.updatedDate
-                      ? guide.data.updatedDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-                      : guide.data.pubDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
-                    }
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))}
-    </div>
-  )}
+  {
+    topicMap.size === 0 ? (
+      <p class="text-(--color-text-secondary)">No guides yet. Check back soon!</p>
+    ) : (
+      <div class="space-y-8">
+        {[...topicMap.entries()].map(([topic, topicGuides]) => (
+          <section>
+            <h2 class="mb-3 text-lg font-semibold text-(--color-accent) capitalize">{topic}</h2>
+            <ul class="space-y-2">
+              {topicGuides.map((guide) => (
+                <li>
+                  <a
+                    href={`/guides/${guide.id}`}
+                    class="group -mx-3 flex items-baseline justify-between rounded-lg p-3 transition-colors hover:bg-(--color-bg-secondary)"
+                  >
+                    <span class="font-medium transition-colors group-hover:text-(--color-accent)">
+                      {guide.data.title}
+                    </span>
+                    <span class="ml-2 shrink-0 text-xs text-(--color-text-secondary)">
+                      {guide.data.updatedDate
+                        ? guide.data.updatedDate.toLocaleDateString('en-US', {
+                            month: 'short',
+                            year: 'numeric',
+                          })
+                        : guide.data.pubDate.toLocaleDateString('en-US', {
+                            month: 'short',
+                            year: 'numeric',
+                          })}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    )
+  }
 </BaseLayout>

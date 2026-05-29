@@ -11,8 +11,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://ghidini.net',
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
 
-  integrations: [mdx(), sitemap()]
+  integrations: [mdx(), sitemap()],
 });

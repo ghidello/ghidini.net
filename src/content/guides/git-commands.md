@@ -1,6 +1,6 @@
 ---
-title: "Git Commands I Always Forget"
-description: "Quick reference for git commands that I can never remember."
+title: 'Git Commands I Always Forget'
+description: 'Quick reference for git commands that I can never remember.'
 pubDate: 2026-05-29
 topic: git
 tags: [git, cli, cheatsheet]
@@ -107,7 +107,7 @@ git commit -m "Re-apply .gitignore"
 
 The `/*` suffix is required — without it, the negation won't work. You also need to un-ignore each intermediate folder in the path.
 
-```gitignore
+```ini
 # Ignore everything in pippo/ except pippo/pluto/paperino.xml
 pippo/*
 !pippo/pluto
@@ -117,7 +117,7 @@ pippo/pluto/*
 
 **Why this doesn't work:**
 
-```gitignore
+```ini
 # WRONG: intermediary folder "pluto" is ignored, so the file can't exist
 pippo/*
 !pippo/pluto/paperino.xml
@@ -125,7 +125,7 @@ pippo/*
 
 **Another gotcha** — `folder` vs `folder/*`:
 
-```gitignore
+```ini
 # WRONG: folder itself is ignored, negation has no effect
 folder
 !folder/some-file.txt

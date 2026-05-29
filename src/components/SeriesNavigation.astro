@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { currentPost } = Astro.props;
-const { series, seriesOrder } = currentPost.data;
+const { series } = currentPost.data;
 
 if (!series) return;
 
@@ -18,28 +18,30 @@ const allPosts = await getCollection('blog', ({ data }) => {
 const seriesPosts = allPosts.sort((a, b) => (a.data.seriesOrder ?? 0) - (b.data.seriesOrder ?? 0));
 ---
 
-{series && (
-  <aside class="my-8 p-4 rounded-lg border border-(--color-border) bg-(--color-bg-secondary)">
-    <h3 class="text-sm font-semibold uppercase tracking-wide text-(--color-text-secondary) mb-3">
-      Series: {series.replace(/-/g, ' ')}
-    </h3>
-    <ol class="space-y-1">
-      {seriesPosts.map((post) => (
-        <li class="text-sm">
-          {post.id === currentPost.id ? (
-            <span class="font-medium text-(--color-accent)">
-              {post.data.seriesOrder}. {post.data.title} (current)
-            </span>
-          ) : (
-            <a
-              href={`/blog/${post.id}`}
-              class="text-(--color-text-secondary) hover:text-(--color-accent) transition-colors"
-            >
-              {post.data.seriesOrder}. {post.data.title}
-            </a>
-          )}
-        </li>
-      ))}
-    </ol>
-  </aside>
-)}
+{
+  series && (
+    <aside class="my-8 rounded-lg border border-(--color-border) bg-(--color-bg-secondary) p-4">
+      <h3 class="mb-3 text-sm font-semibold tracking-wide text-(--color-text-secondary) uppercase">
+        Series: {series.replace(/-/g, ' ')}
+      </h3>
+      <ol class="space-y-1">
+        {seriesPosts.map((post) => (
+          <li class="text-sm">
+            {post.id === currentPost.id ? (
+              <span class="font-medium text-(--color-accent)">
+                {post.data.seriesOrder}. {post.data.title} (current)
+              </span>
+            ) : (
+              <a
+                href={`/blog/${post.id}`}
+                class="text-(--color-text-secondary) transition-colors hover:text-(--color-accent)"
+              >
+                {post.data.seriesOrder}. {post.data.title}
+              </a>
+            )}
+          </li>
+        ))}
+      </ol>
+    </aside>
+  )
+}
