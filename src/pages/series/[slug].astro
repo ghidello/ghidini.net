@@ -39,28 +39,28 @@ const title = slug!.replace(/-/g, ' ');
     ← All series
   </a>
 
-  <div class="mb-8 border-b border-(--color-border) pb-4">
+  <div class="mb-12">
     <div class="mb-2 font-mono text-xs tracking-widest text-(--color-primary) uppercase">
       // Series · {String(seriesPosts.length).padStart(2, '0')} parts
     </div>
-    <h1 class="text-3xl font-bold text-(--color-foreground) capitalize">
+    <h1 class="text-4xl font-extrabold tracking-tight text-(--color-foreground) capitalize">
       {title}
     </h1>
   </div>
 
-  <ol class="space-y-4">
+  <ol class="space-y-6">
     {
       seriesPosts.map((post) => (
         <li>
           <a
             href={`/blog/${post.id}`}
-            class="grid grid-cols-[2rem_1fr_auto] items-baseline gap-4 border border-(--color-border) bg-(--color-surface)/30 p-4 transition-colors hover:border-(--color-primary)/50"
+            class="grid grid-cols-[3rem_1fr_auto] items-baseline gap-4 py-4 transition-colors"
           >
-            <span class="font-mono text-sm text-(--color-muted-foreground)">
+            <span class="font-mono text-lg font-bold text-(--color-primary)">
               {String(post.data.seriesOrder ?? 0).padStart(2, '0')}
             </span>
             <div>
-              <span class="font-medium text-(--color-foreground)">{post.data.title}</span>
+              <span class="text-lg font-semibold text-(--color-foreground)">{post.data.title}</span>
               {post.data.description && (
                 <p class="mt-1 text-sm text-(--color-muted-foreground)">{post.data.description}</p>
               )}
