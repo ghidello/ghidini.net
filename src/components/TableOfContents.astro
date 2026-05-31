@@ -1,0 +1,34 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+// Only surface section-level headings to keep the outline scannable.
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+{
+  toc.length > 1 && (
+    <nav aria-label="Table of contents" class="border-border bg-surface/30 mb-12 border p-6">
+      <h2 class="text-foreground mb-4 font-mono text-xs font-bold tracking-widest uppercase">
+        On this page
+      </h2>
+      <ol class="space-y-2 font-mono text-sm">
+        {toc.map((heading) => (
+          <li class={heading.depth === 3 ? 'ml-4' : ''}>
+            <a
+              href={`#${heading.slug}`}
+              class="text-muted-foreground hover:text-primary transition-colors"
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}

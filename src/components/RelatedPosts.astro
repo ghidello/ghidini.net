@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+{
+  posts.length > 0 && (
+    <aside class="border-border mt-16 border-t pt-12" aria-label="Related posts">
+      <h2 class="text-foreground mb-8 font-mono text-sm font-bold tracking-widest uppercase">
+        Related transmissions
+      </h2>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <a
+            href={`/blog/${post.id}`}
+            class="group border-border hover:border-primary hover:bg-surface/30 block border p-5 transition-colors"
+          >
+            <div class="text-muted-foreground mb-2 font-mono text-[10px] tracking-widest uppercase">
+              <FormattedDate date={post.data.pubDate} />
+            </div>
+            <h3 class="text-foreground group-hover:text-primary font-bold transition-colors">
+              {post.data.title}
+            </h3>
+          </a>
+        ))}
+      </div>
+    </aside>
+  )
+}

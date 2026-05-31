@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, SITE_URL, SITE_DESCRIPTION, AUTHOR } from '../consts';
 import { getSortedBlogPosts } from '../utils/collections';
 
 const posts = await getSortedBlogPosts();
@@ -21,9 +21,28 @@ const series = [...seriesMap.entries()];
 
 // Collect unique tags
 const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_TITLE,
+    url: SITE_URL,
+    description: SITE_DESCRIPTION,
+    inLanguage: 'en',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: AUTHOR.name,
+    url: SITE_URL,
+    jobTitle: 'Software Developer',
+    sameAs: AUTHOR.sameAs,
+  },
+];
 ---
 
-<BaseLayout title={`${SITE_TITLE} — Software Development Blog`}>
+<BaseLayout title={`${SITE_TITLE} — Software Development Blog`} jsonLd={jsonLd}>
   <!-- Hero -->
   <header class="mb-20">
     <div

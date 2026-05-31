@@ -1,0 +1,37 @@
+---
+// Adds a "Copy" button to every code block inside `.prose-flux`.
+// The <script> is bundled by Astro and served as an external module
+// (covered by `script-src 'self'`), so it needs no CSP hash.
+---
+
+<script>
+  function setupCodeCopy() {
+    const blocks = document.querySelectorAll<HTMLPreElement>('.prose-flux pre');
+    blocks.forEach((pre) => {
+      if (pre.querySelector('.code-copy-btn')) return;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-copy-btn';
+      button.textContent = 'Copy';
+      button.setAttribute('aria-label', 'Copy code to clipboard');
+      button.addEventListener('click', async () => {
+        const code = pre.querySelector('code')?.innerText ?? pre.innerText;
+        try {
+          await navigator.clipboard.writeText(code);
+          button.textContent = 'Copied';
+          button.classList.add('is-copied');
+          setTimeout(() => {
+            button.textContent = 'Copy';
+            button.classList.remove('is-copied');
+          }, 2000);
+        } catch {
+          button.textContent = 'Error';
+          setTimeout(() => (button.textContent = 'Copy'), 2000);
+        }
+      });
+      pre.appendChild(button);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupCodeCopy);
+</script>

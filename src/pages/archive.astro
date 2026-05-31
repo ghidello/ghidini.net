@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { SITE_TITLE } from '../consts';
+import { getSortedBlogPosts } from '../utils/collections';
+
+const posts = await getSortedBlogPosts();
+
+// Group posts by publication year, newest first.
+const byYear = new Map<number, typeof posts>();
+for (const post of posts) {
+  const year = post.data.pubDate.getUTCFullYear();
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(post);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+---
+
+<BaseLayout title={`Archive - ${SITE_TITLE}`} description="Every post, in chronological order.">
+  <PageHeader
+    label="// FULL_TIMELINE"
+    title="Archive"
+    description="Every transmission, newest first."
+  />
+
+  {
+    posts.length === 0 ? (
+      <p class="text-muted-foreground">No posts yet. Check back soon!</p>
+    ) : (
+      <div class="space-y-12">
+        {years.map((year) => (
+          <section>
+            <h2 class="text-accent border-border mb-4 border-b pb-2 font-mono text-sm font-bold tracking-widest uppercase">
+              {year}
+            </h2>
+            <ul class="divide-border/40 divide-y">
+              {byYear.get(year)!.map((post) => (
+                <li class="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:gap-4">
+                  <span class="text-muted-foreground shrink-0 font-mono text-xs">
+                    <FormattedDate date={post.data.pubDate} />
+                  </span>
+                  <a
+                    href={`/blog/${post.id}`}
+                    class="text-foreground hover:text-primary font-medium transition-colors"
+                  >
+                    {post.data.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    )
+  }
+</BaseLayout>

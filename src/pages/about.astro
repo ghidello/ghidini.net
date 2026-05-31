@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { SITE_TITLE, SITE_URL, AUTHOR, SITE_DESCRIPTION } from '../consts';
+
+// NOTE: This bio is drafted from the blog's context. Replace the prose below
+// with the exact summary from your LinkedIn profile when you get a chance.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@type': 'Person',
+    name: AUTHOR.name,
+    url: SITE_URL,
+    jobTitle: 'Software Developer',
+    description: SITE_DESCRIPTION,
+    sameAs: AUTHOR.sameAs,
+  },
+};
+
+const stack = [
+  'Astro',
+  'TypeScript',
+  'Angular',
+  '.NET / C#',
+  'Cloudflare Workers',
+  'Node.js',
+  'Git',
+];
+---
+
+<BaseLayout
+  title={`About - ${SITE_TITLE}`}
+  description="Alessandro Ghidini — software developer. Who I am and what this blog is for."
+  jsonLd={jsonLd}
+>
+  <PageHeader
+    label="// WHO_IS_THIS"
+    title="About"
+    description="The human behind the flux capacitor."
+  />
+
+  <div class="grid gap-12 lg:grid-cols-12">
+    <div class="prose-flux lg:col-span-8">
+      <p>
+        I'm <strong>Alessandro Ghidini</strong>, a software developer who builds web applications
+        across the full stack — from <strong>.NET</strong> and <strong>Angular</strong>
+        backends to modern front-ends like this one, built with <strong>Astro</strong> and deployed on
+        <strong>Cloudflare Workers</strong>.
+      </p>
+      <p>
+        This blog is my external brain. I have a terrible memory for the exact incantation of a Git
+        command or the right combination of security headers, so I write things down here: technical
+        deep-dives, post-mortems, and step-by-step guides I want to be able to find again three
+        years from now. If something here saves you an afternoon of debugging, even better.
+      </p>
+      <p>
+        Everything is built in the open — the source for this site lives on GitHub, and each post
+        documents a real decision made while building or running it. No trackers, no cookies, no
+        newsletter pop-ups. Just notes from the lab.
+      </p>
+      <p>
+        Want to talk shop? You'll find me on the links to the right, or you can leave a comment on
+        any post (powered by GitHub Discussions).
+      </p>
+    </div>
+
+    <aside class="space-y-8 lg:col-span-4">
+      <section class="border-border bg-surface/30 border p-6">
+        <h2 class="text-foreground mb-4 font-mono text-xs font-bold tracking-widest uppercase">
+          Stack
+        </h2>
+        <div class="flex flex-wrap gap-2">
+          {
+            stack.map((item) => (
+              <span class="border-border bg-surface text-muted-foreground border px-2 py-1 font-mono text-[10px] tracking-widest uppercase">
+                {item}
+              </span>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="border-border bg-surface/30 border p-6">
+        <h2 class="text-foreground mb-4 font-mono text-xs font-bold tracking-widest uppercase">
+          Elsewhere
+        </h2>
+        <div class="flex flex-col gap-3 font-mono text-sm">
+          <a
+            href="https://github.com/ghidello"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted-foreground hover:text-primary transition-colors"
+          >
+            GitHub &rarr;
+          </a>
+          <a
+            href="https://www.linkedin.com/in/alessandroghidini/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted-foreground hover:text-primary transition-colors"
+          >
+            LinkedIn &rarr;
+          </a>
+          <a
+            href="https://x.com/ghidello"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-muted-foreground hover:text-primary transition-colors"
+          >
+            X / Twitter &rarr;
+          </a>
+        </div>
+      </section>
+    </aside>
+  </div>
+</BaseLayout>

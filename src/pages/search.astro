@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { SITE_TITLE } from '../consts';
+
+// Search is powered by Pagefind, which indexes the built site as a postbuild
+// step. The assets under /pagefind/ only exist after `npm run build`, so search
+// works in `astro preview` and production, not in `astro dev`.
+---
+
+<BaseLayout
+  title={`Search - ${SITE_TITLE}`}
+  description="Full-text search across every post and guide."
+>
+  <PageHeader
+    label="// QUERY_INDEX"
+    title="Search"
+    description="Grep the whole archive. Full-text, runs entirely in your browser."
+  />
+
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <div id="search"></div>
+
+  <script src="/pagefind/pagefind-ui.js" is:inline></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof PagefindUI !== 'undefined') {
+        new PagefindUI({ element: '#search', showSubResults: true, showImages: false });
+      }
+    });
+  </script>
+</BaseLayout>

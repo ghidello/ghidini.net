@@ -1,21 +1,66 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { MarkdownHeading } from 'astro';
+import { Image } from 'astro:assets';
 import BaseLayout from './BaseLayout.astro';
 import SeriesNavigation from '../components/SeriesNavigation.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
+import CodeCopy from '../components/CodeCopy.astro';
 import Giscus from '../components/Giscus.astro';
+import { getReadingTime, getRelatedPosts } from '../utils/collections';
+import { SITE_TITLE, SITE_URL, AUTHOR } from '../consts';
 
 interface Props {
   post: CollectionEntry<'blog'>;
+  headings?: MarkdownHeading[];
 }
 
-const { post } = Astro.props;
-const { title, description, pubDate, updatedDate, heroImage, author, tags, series, seriesOrder } =
-  post.data;
+const { post, headings = [] } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  heroImageAlt,
+  author,
+  tags,
+  series,
+  seriesOrder,
+} = post.data;
+
+const readingTime = getReadingTime(post.body);
+const relatedPosts = await getRelatedPosts(post);
+const ogImage = `/open-graph/blog/${post.id}.png`;
+
+const canonical = new URL(`/blog/${post.id}`, SITE_URL).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  ...(updatedDate && { dateModified: updatedDate.toISOString() }),
+  author: { '@type': 'Person', name: author, url: AUTHOR.url },
+  publisher: { '@type': 'Person', name: AUTHOR.name, url: AUTHOR.url },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  url: canonical,
+  keywords: tags.join(', '),
+  image: new URL(ogImage, SITE_URL).href,
+  isPartOf: { '@type': 'Blog', name: SITE_TITLE, url: new URL('/blog', SITE_URL).href },
+};
 ---
 
-<BaseLayout title={title} description={description} image={heroImage}>
-  <article class="mx-auto max-w-4xl">
+<BaseLayout
+  title={title}
+  description={description}
+  ogImage={ogImage}
+  ogType="article"
+  jsonLd={jsonLd}
+>
+  <article class="mx-auto max-w-4xl" data-pagefind-body>
     <a
       href="/blog"
       class="text-muted-foreground hover:text-primary mb-8 inline-block font-mono text-xs tracking-widest uppercase"
@@ -41,6 +86,7 @@ const { title, description, pubDate, updatedDate, heroImage, author, tags, serie
       <div class="text-muted-foreground flex flex-wrap items-center gap-4 font-mono text-xs">
         <FormattedDate date={pubDate} format="long" />
         <span>· By {author}</span>
+        <span>· {readingTime} min read</span>
         {
           updatedDate && (
             <span>
@@ -52,12 +98,30 @@ const { title, description, pubDate, updatedDate, heroImage, author, tags, serie
       </div>
     </header>
 
+    {
+      heroImage && (
+        <Image
+          src={heroImage}
+          alt={heroImageAlt ?? title}
+          class="border-border mb-12 w-full border"
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 800px) 100vw, 800px"
+          loading="eager"
+        />
+      )
+    }
+
+    <TableOfContents headings={headings} />
+
     <div class="prose-flux">
       <slot />
     </div>
+
+    <RelatedPosts posts={relatedPosts} />
 
     <SeriesNavigation currentPost={post} />
 
     <Giscus />
   </article>
+  <CodeCopy />
 </BaseLayout>

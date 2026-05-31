@@ -3,9 +3,10 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import BackLink from '../../components/BackLink.astro';
+import CodeCopy from '../../components/CodeCopy.astro';
 import Giscus from '../../components/Giscus.astro';
-import { SITE_TITLE } from '../../consts';
-import { isPublished } from '../../utils/collections';
+import { SITE_TITLE, SITE_URL, AUTHOR } from '../../consts';
+import { isPublished, getReadingTime } from '../../utils/collections';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides', ({ data }) => isPublished(data));
@@ -18,10 +19,34 @@ export async function getStaticPaths() {
 const { guide } = Astro.props;
 const { title, description, pubDate, updatedDate, topic, author, tags } = guide.data;
 const { Content } = await render(guide);
+
+const readingTime = getReadingTime(guide.body);
+const ogImage = `/open-graph/guides/${guide.id}.png`;
+const canonical = new URL(`/guides/${guide.id}`, SITE_URL).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  ...(updatedDate && { dateModified: updatedDate.toISOString() }),
+  author: { '@type': 'Person', name: author, url: AUTHOR.url },
+  publisher: { '@type': 'Person', name: AUTHOR.name, url: AUTHOR.url },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  url: canonical,
+  keywords: tags.join(', '),
+  image: new URL(ogImage, SITE_URL).href,
+};
 ---
 
-<BaseLayout title={`${title} - ${SITE_TITLE}`} description={description}>
-  <article class="mx-auto max-w-4xl">
+<BaseLayout
+  title={`${title} - ${SITE_TITLE}`}
+  description={description}
+  ogImage={ogImage}
+  ogType="article"
+  jsonLd={jsonLd}
+>
+  <article class="mx-auto max-w-4xl" data-pagefind-body>
     <BackLink href="/guides" label="All guides" />
 
     <header class="border-border mb-12 border-b pb-8">
@@ -39,6 +64,7 @@ const { Content } = await render(guide);
       <div class="text-muted-foreground flex flex-wrap items-center gap-4 font-mono text-xs">
         <FormattedDate date={pubDate} format="long" />
         <span>· By {author}</span>
+        <span>· {readingTime} min read</span>
         {
           updatedDate && (
             <span>
@@ -56,4 +82,5 @@ const { Content } = await render(guide);
 
     <Giscus />
   </article>
+  <CodeCopy />
 </BaseLayout>

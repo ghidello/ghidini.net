@@ -3,6 +3,9 @@ const NAV = [
   { label: 'Blog', href: '/blog' },
   { label: 'Guides', href: '/guides' },
   { label: 'Series', href: '/series' },
+  { label: 'Archive', href: '/archive' },
+  { label: 'About', href: '/about' },
+  { label: 'Search', href: '/search' },
 ];
 const pathname = Astro.url.pathname;
 ---
@@ -21,7 +24,7 @@ const pathname = Astro.url.pathname;
         THE FLUX CAPACITOR
       </span>
     </a>
-    <div class="hidden gap-8 font-mono text-xs tracking-widest uppercase md:flex">
+    <div class="hidden gap-5 font-mono text-xs tracking-widest uppercase md:flex lg:gap-8">
       {
         NAV.map((item, idx) => {
           const active = pathname === item.href || pathname.startsWith(item.href + '/');
