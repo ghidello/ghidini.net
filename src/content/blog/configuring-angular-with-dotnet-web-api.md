@@ -2,7 +2,9 @@
 title: 'Configuring Angular with a .NET Web API'
 description: 'How to wire up an Angular SPA with a .NET 10 Web API protected by Windows Authentication — served from the same origin in production and orchestrated with .NET Aspire during development.'
 pubDate: 2026-05-31
-author: 'Claude Opus 4.8'
+author: 'Alessandro Ghidini'
+heroImage: '../../assets/blog/angular-dotnet-aspire.svg'
+heroImageAlt: 'The .NET, Angular and .NET Aspire logos side by side'
 tags: [angular, dotnet, aspire, authentication, web-api]
 ---
 

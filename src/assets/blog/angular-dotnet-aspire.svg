@@ -1,0 +1,97 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1200 600"
+  width="1200"
+  height="600"
+  role="img"
+  aria-label=".NET, Angular and .NET Aspire logos"
+>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#121217" />
+      <stop offset="1" stop-color="#0a0a0c" />
+    </linearGradient>
+    <linearGradient id="angularShield" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e40035" />
+      <stop offset="1" stop-color="#f60094" />
+    </linearGradient>
+    <linearGradient id="aspire" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a179f0" />
+      <stop offset="1" stop-color="#5c2ee0" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#00f3ff" stop-opacity="0.10" />
+      <stop offset="1" stop-color="#00f3ff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="600" fill="url(#bg)" />
+  <ellipse cx="600" cy="300" rx="520" ry="260" fill="url(#glow)" />
+
+  <!-- ===== .NET ===== -->
+  <g transform="translate(150 210)">
+    <rect width="180" height="180" rx="28" fill="#512bd4" />
+    <text
+      x="90"
+      y="118"
+      font-family="'Segoe UI', Arial, sans-serif"
+      font-size="58"
+      font-weight="700"
+      fill="#ffffff"
+      text-anchor="middle"
+    >.NET</text>
+  </g>
+
+  <!-- ===== Angular ===== -->
+  <g transform="translate(510 200)">
+    <!-- shield -->
+    <path
+      d="M90 0 L180 32 L166 158 L90 200 L14 158 L0 32 Z"
+      fill="url(#angularShield)"
+    />
+    <!-- stylised A -->
+    <path
+      d="M90 36 L138 150 L120 150 L110 124 L70 124 L60 150 L42 150 Z M90 78 L76 110 L104 110 Z"
+      fill="#ffffff"
+    />
+  </g>
+
+  <!-- ===== .NET Aspire ===== -->
+  <g transform="translate(870 210)">
+    <rect width="180" height="180" rx="28" fill="#1b1140" />
+    <!-- abstract aspire mark: overlapping petals -->
+    <g transform="translate(90 90)">
+      <path
+        d="M0 -56 C 26 -36 26 -12 0 8 C -26 -12 -26 -36 0 -56 Z"
+        fill="url(#aspire)"
+        transform="rotate(0)"
+      />
+      <path
+        d="M0 -56 C 26 -36 26 -12 0 8 C -26 -12 -26 -36 0 -56 Z"
+        fill="url(#aspire)"
+        opacity="0.85"
+        transform="rotate(120)"
+      />
+      <path
+        d="M0 -56 C 26 -36 26 -12 0 8 C -26 -12 -26 -36 0 -56 Z"
+        fill="url(#aspire)"
+        opacity="0.7"
+        transform="rotate(240)"
+      />
+      <circle cx="0" cy="0" r="14" fill="#cdb8ff" />
+    </g>
+  </g>
+
+  <!-- captions -->
+  <g
+    font-family="'Segoe UI', Arial, sans-serif"
+    font-size="22"
+    fill="#9aa0aa"
+    text-anchor="middle"
+  >
+    <text x="240" y="430">.NET</text>
+    <text x="600" y="430">Angular</text>
+    <text x="960" y="430">.NET Aspire</text>
+  </g>
+</svg>
