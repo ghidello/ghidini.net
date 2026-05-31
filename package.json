@@ -7,14 +7,14 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/inject-csp-hashes.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "eslint .",
-    "deploy": "astro build && wrangler deploy",
-    "deploy:preview": "astro build && wrangler dev"
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:preview": "npm run build && wrangler dev"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.1",

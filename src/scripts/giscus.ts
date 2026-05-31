@@ -1,8 +1,7 @@
 // Click-to-load handler for the giscus comments widget. Astro inlines this
-// small script into each page as a `<script type="module">`. Because of that,
-// its hash is pinned in the Content-Security-Policy `script-src` directive (see
-// public/_headers). IF YOU EDIT THIS FILE, rebuild and update that sha256 hash,
-// otherwise the comments loader will be blocked by CSP.
+// small script into each page as a `<script type="module">`. Its CSP hash is
+// computed automatically after every build by scripts/inject-csp-hashes.mjs and
+// injected into dist/_headers, so editing this file needs no manual hash update.
 const loadBtn = document.getElementById('giscus-load') as HTMLButtonElement | null;
 const placeholder = document.getElementById('giscus-placeholder');
 
