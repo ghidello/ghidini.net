@@ -40,6 +40,15 @@ const configured = GISCUS.repoId !== '' && GISCUS.categoryId !== '';
         <button
           id="giscus-load"
           type="button"
+          data-repo={GISCUS.repo}
+          data-repo-id={GISCUS.repoId}
+          data-category={GISCUS.category}
+          data-category-id={GISCUS.categoryId}
+          data-mapping={GISCUS.mapping}
+          data-reactions-enabled={GISCUS.reactionsEnabled}
+          data-input-position={GISCUS.inputPosition}
+          data-theme={GISCUS.theme}
+          data-lang={GISCUS.lang}
           class="border-accent/40 bg-accent/10 text-accent hover:bg-accent/20 cursor-pointer border px-4 py-2 font-mono text-xs tracking-widest uppercase transition-colors"
         >
           Load comments
@@ -48,31 +57,7 @@ const configured = GISCUS.repoId !== '' && GISCUS.categoryId !== '';
 
       <div class="giscus" />
 
-      <script
-        is:inline
-        define:vars={{
-          repo: GISCUS.repo,
-          repoId: GISCUS.repoId,
-          category: GISCUS.category,
-          categoryId: GISCUS.categoryId,
-          mapping: GISCUS.mapping,
-          reactionsEnabled: GISCUS.reactionsEnabled,
-          inputPosition: GISCUS.inputPosition,
-          theme: GISCUS.theme,
-          lang: GISCUS.lang,
-        }}
-      >
-        const loadBtn = document.getElementById('giscus-load'); const placeholder =
-        document.getElementById('giscus-placeholder'); loadBtn?.addEventListener('click', () => {
-        const s = document.createElement('script'); s.src = 'https://giscus.app/client.js';
-        s.setAttribute('data-repo', repo); s.setAttribute('data-repo-id', repoId);
-        s.setAttribute('data-category', category); s.setAttribute('data-category-id', categoryId);
-        s.setAttribute('data-mapping', mapping); s.setAttribute('data-strict', '1');
-        s.setAttribute('data-reactions-enabled', reactionsEnabled); s.setAttribute('data-emit-metadata',
-        '0'); s.setAttribute('data-input-position', inputPosition); s.setAttribute('data-theme',
-        theme); s.setAttribute('data-lang', lang); s.setAttribute('crossorigin', 'anonymous');
-        s.async = true; document.querySelector('.giscus')?.appendChild(s); placeholder?.remove(); });
-      </script>
+      <script>import '../scripts/giscus';</script>
     </section>
   )
 }
