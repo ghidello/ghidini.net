@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
+import { isPublished } from '../utils/collections';
 
 interface Props {
   currentPost: CollectionEntry<'blog'>;
@@ -12,7 +13,7 @@ const { series } = currentPost.data;
 if (!series) return;
 
 const allPosts = await getCollection('blog', ({ data }) => {
-  return data.series === series && !data.draft;
+  return data.series === series && isPublished(data);
 });
 
 const seriesPosts = allPosts.sort((a, b) => (a.data.seriesOrder ?? 0) - (b.data.seriesOrder ?? 0));

@@ -4,9 +4,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import BackLink from '../../components/BackLink.astro';
 import { SITE_TITLE } from '../../consts';
+import { isPublished } from '../../utils/collections';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const posts = await getCollection('blog', ({ data }) => isPublished(data));
   const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
 
   return tags.map((tag) => ({

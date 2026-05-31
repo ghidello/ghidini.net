@@ -5,9 +5,10 @@ import FormattedDate from '../../components/FormattedDate.astro';
 import BackLink from '../../components/BackLink.astro';
 import Giscus from '../../components/Giscus.astro';
 import { SITE_TITLE } from '../../consts';
+import { isPublished } from '../../utils/collections';
 
 export async function getStaticPaths() {
-  const guides = await getCollection('guides');
+  const guides = await getCollection('guides', ({ data }) => isPublished(data));
   return guides.map((guide) => ({
     params: { slug: guide.id },
     props: { guide },
