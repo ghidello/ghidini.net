@@ -175,4 +175,4 @@ Tools like the [Mozilla Observatory](https://developer.mozilla.org/en-US/observa
 - A 60-line post-build script makes the CSP self-maintaining, so inline scripts can change freely.
 - Self-hosting fonts and gating third-party comments behind a click means the blog doesn't leak visitor data to anyone they didn't agree to.
 
-That wraps the **building this blog** series. From choosing Astro to deploying on Cloudflare to locking it down — it's now the searchable external brain I set out to build.
+With the blog secured, the last piece is a publishing workflow — drafts and scheduled posts — which the next post covers.

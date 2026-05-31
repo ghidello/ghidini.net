@@ -1,0 +1,12 @@
+{
+  "name": "ghidello-daily-rebuild",
+  "main": "index.js",
+  "compatibility_date": "2026-05-29",
+  "workers_dev": false,
+  "preview_urls": false,
+  // 05:00 UTC daily ≈ 07:00 Europe/Rome (CEST). Safely past Rome midnight so a
+  // post dated for "today" in Rome is already publishable when the build runs.
+  "triggers": {
+    "crons": ["0 5 * * *"]
+  }
+}
