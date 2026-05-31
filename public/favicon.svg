@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
   <defs>
     <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#dbeafe"/>
-      <stop offset="100%" stop-color="#bfdbfe"/>
+      <stop offset="0%" stop-color="#121217"/>
+      <stop offset="100%" stop-color="#0a0a0c"/>
     </linearGradient>
     <filter id="glow">
       <feGaussianBlur stdDeviation="3" result="blur"/>
@@ -12,19 +12,19 @@
       </feMerge>
     </filter>
   </defs>
-  <!-- Background circle — light blue -->
-  <circle cx="64" cy="64" r="62" fill="url(#bg-grad)"/>
-  <!-- Y-shape flux capacitor arms — glowing blue -->
+  <!-- Background circle — deep ink -->
+  <circle cx="64" cy="64" r="62" fill="url(#bg-grad)" stroke="#00f3ff" stroke-opacity="0.35" stroke-width="2"/>
+  <!-- Y-shape flux capacitor arms — glowing cyan -->
   <g filter="url(#glow)">
-    <line x1="64" y1="64" x2="64" y2="22" stroke="#2563eb" stroke-width="18" stroke-linecap="round"/>
-    <line x1="64" y1="64" x2="28" y2="85" stroke="#2563eb" stroke-width="18" stroke-linecap="round"/>
-    <line x1="64" y1="64" x2="100" y2="85" stroke="#2563eb" stroke-width="18" stroke-linecap="round"/>
+    <line x1="64" y1="64" x2="64" y2="22" stroke="#00c4cf" stroke-width="18" stroke-linecap="round"/>
+    <line x1="64" y1="64" x2="28" y2="85" stroke="#00c4cf" stroke-width="18" stroke-linecap="round"/>
+    <line x1="64" y1="64" x2="100" y2="85" stroke="#00c4cf" stroke-width="18" stroke-linecap="round"/>
     <!-- Arm tips -->
-    <circle cx="64" cy="22" r="11" fill="#3b82f6"/>
-    <circle cx="28" cy="85" r="11" fill="#3b82f6"/>
-    <circle cx="100" cy="85" r="11" fill="#3b82f6"/>
+    <circle cx="64" cy="22" r="11" fill="#00f3ff"/>
+    <circle cx="28" cy="85" r="11" fill="#00f3ff"/>
+    <circle cx="100" cy="85" r="11" fill="#00f3ff"/>
     <!-- Center hub -->
-    <circle cx="64" cy="64" r="15" fill="#1d4ed8"/>
-    <circle cx="64" cy="64" r="9" fill="#60a5fa"/>
+    <circle cx="64" cy="64" r="15" fill="#0891a8"/>
+    <circle cx="64" cy="64" r="9" fill="#7df9ff"/>
   </g>
 </svg>
