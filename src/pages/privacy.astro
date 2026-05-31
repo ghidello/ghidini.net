@@ -22,7 +22,8 @@ const lastUpdated = 'May 31, 2026';
     <section class="mb-8 space-y-4">
       <h2 class="text-xl font-semibold">2. Data Controller</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
-        The data controller for this website is Alessandro Ghidini. You can contact me at: <a
+        The data controller for this website is Alessandro Ghidini, established in Italy. You can
+        contact me regarding any privacy matter at: <a
           href="mailto:privacy@ghidini.net"
           class="text-(--color-accent) hover:underline">privacy@ghidini.net</a
         >
@@ -32,19 +33,20 @@ const lastUpdated = 'May 31, 2026';
     <section class="mb-8 space-y-4">
       <h2 class="text-xl font-semibold">3. What Data I Collect</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
-        This is a static website. I do not collect, store, or process any personal data directly.
-        Specifically:
+        This is a static website. By itself, it does not collect, store, or process any personal
+        data. Specifically:
       </p>
       <ul class="list-disc space-y-2 pl-6 text-(--color-muted-foreground)">
-        <li>No cookies are set by this website</li>
+        <li>No first-party cookies are set by this website</li>
         <li>No user accounts or registration</li>
         <li>No contact forms that store data</li>
         <li>No analytics or tracking scripts</li>
         <li>No advertising networks</li>
       </ul>
       <p class="leading-relaxed text-(--color-muted-foreground)">
-        The one exception is the comments section on blog posts and guides, which is provided by a
-        third-party service (giscus). See the &ldquo;Comments&rdquo; section below for details.
+        Two forms of processing do occur and are described below: technical server logs created by
+        my hosting provider (Section 5), and the optional comments section (Section 4), which only
+        loads a third-party widget after you explicitly choose to load it.
       </p>
     </section>
 
@@ -63,45 +65,83 @@ const lastUpdated = 'May 31, 2026';
           rel="noopener noreferrer"
           target="_blank"
           class="text-(--color-accent) hover:underline">GitHub Discussions</a
-        >. The comments widget is loaded from giscus.app and embeds content from GitHub.
+        >.
       </p>
       <p class="leading-relaxed text-(--color-muted-foreground)">
-        To post a comment you must sign in with a GitHub account and authorize the giscus app. When
-        you do so, your comment, GitHub username, and avatar are stored as a GitHub Discussion in
-        this site&rsquo;s public repository and are publicly visible. This processing is carried out
-        by GitHub, Inc. and is governed by the
+        The comments widget does <strong>not</strong> load automatically. A placeholder is shown until
+        you click &ldquo;Load comments&rdquo;. Only then is the widget loaded from giscus.app, which embeds
+        content from GitHub. This loading connects your browser to giscus.app and github.com, which may
+        receive your IP address and set their own cookies. Because this happens only after your explicit
+        action, the legal basis for this processing is your consent (Art. 6(1)(a) GDPR). You can withdraw
+        your consent at any time by not loading the widget; if you have already loaded it, clearing your
+        browser cookies and reloading the page restores the placeholder.
+      </p>
+      <p class="leading-relaxed text-(--color-muted-foreground)">
+        To post a comment you must additionally sign in with a GitHub account and authorize the
+        giscus app. When you do so, your comment, GitHub username, and avatar are stored as a GitHub
+        Discussion in this site&rsquo;s public repository and are publicly visible. This processing
+        is carried out by GitHub, Inc. and is governed by the
         <a
           href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement"
           rel="noopener noreferrer"
           target="_blank"
           class="text-(--color-accent) hover:underline">GitHub Privacy Statement</a
-        >. Simply reading comments does not require an account and does not store personal data on
-        your device. You can edit or delete your comments at any time through GitHub.
+        >. You can edit or delete your comments at any time through GitHub.
       </p>
     </section>
 
     <section class="mb-8 space-y-4">
       <h2 class="text-xl font-semibold">5. Hosting</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
-        This website is hosted as a static site. The hosting provider may collect technical data
-        such as IP addresses in server logs for security purposes. This processing is based on the
-        legitimate interest of ensuring the security and availability of the website (Art. 6(1)(f)
-        GDPR).
+        This website is hosted as a static site on Cloudflare (Cloudflare, Inc.). As is standard for
+        web hosting, Cloudflare may process technical data such as your IP address, browser type,
+        and request metadata in server and security logs to deliver the site and protect it against
+        abuse. This processing is based on my legitimate interest in ensuring the security and
+        availability of the website (Art. 6(1)(f) GDPR). Cloudflare acts as my processor and handles
+        this data in accordance with its own
+        <a
+          href="https://www.cloudflare.com/privacypolicy/"
+          rel="noopener noreferrer"
+          target="_blank"
+          class="text-(--color-accent) hover:underline">privacy policy</a
+        >.
       </p>
     </section>
 
     <section class="mb-8 space-y-4">
       <h2 class="text-xl font-semibold">6. Third-Party Services</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
-        This website may embed content from third-party services (e.g., code examples, fonts, and
-        the giscus comments widget). These services may collect data according to their own privacy
-        policies. I recommend reviewing the privacy policies of any third-party services referenced
-        in my content.
+        Fonts used on this website are self-hosted and served from this domain, so no font data is
+        sent to third parties. The only third-party service that may receive your data is the giscus
+        comments widget, and only after you choose to load it (see Section 4). Blog content may also
+        link to external websites; following those links is subject to their own privacy policies.
       </p>
     </section>
 
     <section class="mb-8 space-y-4">
-      <h2 class="text-xl font-semibold">7. Your Rights</h2>
+      <h2 class="text-xl font-semibold">7. International Data Transfers</h2>
+      <p class="leading-relaxed text-(--color-muted-foreground)">
+        Some of the processors named above (Cloudflare, Inc. and GitHub, Inc.) are based in the
+        United States and may process data outside the European Economic Area. Where this occurs,
+        the transfer is safeguarded by appropriate mechanisms under Chapter V of the GDPR, such as
+        the EU&ndash;US Data Privacy Framework and/or the European Commission&rsquo;s Standard
+        Contractual Clauses. Please refer to each provider&rsquo;s privacy policy for details of the
+        safeguards they apply.
+      </p>
+    </section>
+
+    <section class="mb-8 space-y-4">
+      <h2 class="text-xl font-semibold">8. Data Retention</h2>
+      <p class="leading-relaxed text-(--color-muted-foreground)">
+        I do not store personal data on my own systems. Server and security logs are retained by my
+        hosting provider for the period set out in its policies. Comments remain published as GitHub
+        Discussions until you or I delete them; you can remove your own comments at any time through
+        GitHub.
+      </p>
+    </section>
+
+    <section class="mb-8 space-y-4">
+      <h2 class="text-xl font-semibold">9. Your Rights</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
         Under the GDPR, you have the right to:
       </p>
@@ -112,21 +152,23 @@ const lastUpdated = 'May 31, 2026';
         <li>Restrict processing of your data</li>
         <li>Data portability</li>
         <li>Object to processing</li>
+        <li>Withdraw consent at any time, where processing is based on consent</li>
         <li>Lodge a complaint with a supervisory authority</li>
       </ul>
-    </section>
-
-    <section class="mb-8 space-y-4">
-      <h2 class="text-xl font-semibold">8. Local Storage</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
-        This website uses browser local storage solely to remember your theme preference (light or
-        dark mode). This data never leaves your device and is not transmitted to any server. You can
-        clear this data at any time through your browser settings.
+        To exercise any of these rights, contact me at <a
+          href="mailto:privacy@ghidini.net"
+          class="text-(--color-accent) hover:underline">privacy@ghidini.net</a
+        >. I will respond without undue delay and in any case within one month, as required by the
+        GDPR. Note that comments and account data held by GitHub are controlled by GitHub; you may
+        need to exercise some rights directly through your GitHub account. If you believe your
+        rights have been infringed, you may lodge a complaint with your local data protection
+        authority (in Italy, the Garante per la protezione dei dati personali).
       </p>
     </section>
 
     <section class="mb-8 space-y-4">
-      <h2 class="text-xl font-semibold">9. Changes to This Policy</h2>
+      <h2 class="text-xl font-semibold">10. Changes to This Policy</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
         I may update this privacy policy from time to time. Any changes will be posted on this page
         with an updated revision date.

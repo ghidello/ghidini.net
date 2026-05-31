@@ -2,8 +2,13 @@
 import { GISCUS } from '../consts';
 
 // Renders the giscus comments widget (https://giscus.app), backed by GitHub
-// Discussions. Configuration lives in `src/consts.ts`. The widget only loads
-// once the required repo/category IDs have been provided.
+// Discussions. Configuration lives in `src/consts.ts`.
+//
+// For GDPR compliance the widget is NOT loaded automatically: embedding the
+// giscus iframe contacts giscus.app and github.com (transmitting the visitor's
+// IP and potentially setting cookies). Instead we render a placeholder and only
+// inject the giscus script after the visitor explicitly clicks to load it,
+// which constitutes consent for that third-party processing.
 const configured = GISCUS.repoId !== '' && GISCUS.categoryId !== '';
 ---
 
@@ -13,25 +18,77 @@ const configured = GISCUS.repoId !== '' && GISCUS.categoryId !== '';
       <h2 class="mb-6 font-mono text-xs tracking-widest text-(--color-muted-foreground) uppercase">
         Comments
       </h2>
+
+      <div
+        id="giscus-placeholder"
+        class="rounded border border-(--color-border) bg-(--color-surface) p-6"
+      >
+        <p class="mb-4 text-sm leading-relaxed text-(--color-muted-foreground)">
+          Comments are powered by{' '}
+          <a
+            href="https://giscus.app"
+            rel="noopener noreferrer"
+            target="_blank"
+            class="text-(--color-accent) hover:underline"
+          >
+            giscus
+          </a>{' '}
+          and GitHub Discussions. Loading them connects to giscus.app and github.com, which may
+          process your IP address and set cookies. See the{' '}
+          <a href="/privacy" class="text-(--color-accent) hover:underline">
+            privacy policy
+          </a>{' '}
+          for details.
+        </p>
+        <button
+          id="giscus-load"
+          type="button"
+          class="cursor-pointer border border-(--color-accent)/40 bg-(--color-accent)/10 px-4 py-2 font-mono text-xs tracking-widest text-(--color-accent) uppercase transition-colors hover:bg-(--color-accent)/20"
+        >
+          Load comments
+        </button>
+      </div>
+
       <div class="giscus" />
+
       <script
         is:inline
-        src="https://giscus.app/client.js"
-        data-repo={GISCUS.repo}
-        data-repo-id={GISCUS.repoId}
-        data-category={GISCUS.category}
-        data-category-id={GISCUS.categoryId}
-        data-mapping={GISCUS.mapping}
-        data-strict="0"
-        data-reactions-enabled={GISCUS.reactionsEnabled}
-        data-emit-metadata="0"
-        data-input-position={GISCUS.inputPosition}
-        data-theme={GISCUS.theme}
-        data-lang={GISCUS.lang}
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async
-      />
+        define:vars={{
+          repo: GISCUS.repo,
+          repoId: GISCUS.repoId,
+          category: GISCUS.category,
+          categoryId: GISCUS.categoryId,
+          mapping: GISCUS.mapping,
+          reactionsEnabled: GISCUS.reactionsEnabled,
+          inputPosition: GISCUS.inputPosition,
+          theme: GISCUS.theme,
+          lang: GISCUS.lang,
+        }}
+      >
+        {`
+          const loadBtn = document.getElementById('giscus-load');
+          const placeholder = document.getElementById('giscus-placeholder');
+          loadBtn?.addEventListener('click', () => {
+            const s = document.createElement('script');
+            s.src = 'https://giscus.app/client.js';
+            s.setAttribute('data-repo', repo);
+            s.setAttribute('data-repo-id', repoId);
+            s.setAttribute('data-category', category);
+            s.setAttribute('data-category-id', categoryId);
+            s.setAttribute('data-mapping', mapping);
+            s.setAttribute('data-strict', '1');
+            s.setAttribute('data-reactions-enabled', reactionsEnabled);
+            s.setAttribute('data-emit-metadata', '0');
+            s.setAttribute('data-input-position', inputPosition);
+            s.setAttribute('data-theme', theme);
+            s.setAttribute('data-lang', lang);
+            s.setAttribute('crossorigin', 'anonymous');
+            s.async = true;
+            document.querySelector('.giscus')?.appendChild(s);
+            placeholder?.remove();
+          });
+        `}
+      </script>
     </section>
   )
 }
