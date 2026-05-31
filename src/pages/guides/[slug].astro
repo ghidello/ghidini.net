@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import BackLink from '../../components/BackLink.astro';
+import Giscus from '../../components/Giscus.astro';
 import { SITE_TITLE } from '../../consts';
 
 export async function getStaticPaths() {
@@ -57,5 +58,7 @@ const { Content } = await render(guide);
     <div class="prose-flux">
       <Content />
     </div>
+
+    <Giscus />
   </article>
 </BaseLayout>

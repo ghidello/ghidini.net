@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_TITLE } from '../consts';
 
-const lastUpdated = 'May 29, 2026';
+const lastUpdated = 'May 31, 2026';
 ---
 
 <BaseLayout title={`Privacy Policy - ${SITE_TITLE}`} description="Privacy policy for ghidini.net">
@@ -42,10 +42,46 @@ const lastUpdated = 'May 29, 2026';
         <li>No analytics or tracking scripts</li>
         <li>No advertising networks</li>
       </ul>
+      <p class="leading-relaxed text-(--color-muted-foreground)">
+        The one exception is the comments section on blog posts and guides, which is provided by a
+        third-party service (giscus). See the &ldquo;Comments&rdquo; section below for details.
+      </p>
     </section>
 
     <section class="mb-8 space-y-4">
-      <h2 class="text-xl font-semibold">4. Hosting</h2>
+      <h2 class="text-xl font-semibold">4. Comments</h2>
+      <p class="leading-relaxed text-(--color-muted-foreground)">
+        Comments on blog posts and guides are powered by
+        <a
+          href="https://giscus.app"
+          rel="noopener noreferrer"
+          target="_blank"
+          class="text-(--color-accent) hover:underline">giscus</a
+        >, an open-source comment system built on
+        <a
+          href="https://docs.github.com/discussions"
+          rel="noopener noreferrer"
+          target="_blank"
+          class="text-(--color-accent) hover:underline">GitHub Discussions</a
+        >. The comments widget is loaded from giscus.app and embeds content from GitHub.
+      </p>
+      <p class="leading-relaxed text-(--color-muted-foreground)">
+        To post a comment you must sign in with a GitHub account and authorize the giscus app. When
+        you do so, your comment, GitHub username, and avatar are stored as a GitHub Discussion in
+        this site&rsquo;s public repository and are publicly visible. This processing is carried out
+        by GitHub, Inc. and is governed by the
+        <a
+          href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement"
+          rel="noopener noreferrer"
+          target="_blank"
+          class="text-(--color-accent) hover:underline">GitHub Privacy Statement</a
+        >. Simply reading comments does not require an account and does not store personal data on
+        your device. You can edit or delete your comments at any time through GitHub.
+      </p>
+    </section>
+
+    <section class="mb-8 space-y-4">
+      <h2 class="text-xl font-semibold">5. Hosting</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
         This website is hosted as a static site. The hosting provider may collect technical data
         such as IP addresses in server logs for security purposes. This processing is based on the
@@ -55,16 +91,17 @@ const lastUpdated = 'May 29, 2026';
     </section>
 
     <section class="mb-8 space-y-4">
-      <h2 class="text-xl font-semibold">5. Third-Party Services</h2>
+      <h2 class="text-xl font-semibold">6. Third-Party Services</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
-        This website may embed content from third-party services (e.g., code examples, fonts). These
-        services may collect data according to their own privacy policies. I recommend reviewing the
-        privacy policies of any third-party services referenced in my content.
+        This website may embed content from third-party services (e.g., code examples, fonts, and
+        the giscus comments widget). These services may collect data according to their own privacy
+        policies. I recommend reviewing the privacy policies of any third-party services referenced
+        in my content.
       </p>
     </section>
 
     <section class="mb-8 space-y-4">
-      <h2 class="text-xl font-semibold">6. Your Rights</h2>
+      <h2 class="text-xl font-semibold">7. Your Rights</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
         Under the GDPR, you have the right to:
       </p>
@@ -80,7 +117,7 @@ const lastUpdated = 'May 29, 2026';
     </section>
 
     <section class="mb-8 space-y-4">
-      <h2 class="text-xl font-semibold">7. Local Storage</h2>
+      <h2 class="text-xl font-semibold">8. Local Storage</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
         This website uses browser local storage solely to remember your theme preference (light or
         dark mode). This data never leaves your device and is not transmitted to any server. You can
@@ -89,7 +126,7 @@ const lastUpdated = 'May 29, 2026';
     </section>
 
     <section class="mb-8 space-y-4">
-      <h2 class="text-xl font-semibold">8. Changes to This Policy</h2>
+      <h2 class="text-xl font-semibold">9. Changes to This Policy</h2>
       <p class="leading-relaxed text-(--color-muted-foreground)">
         I may update this privacy policy from time to time. Any changes will be posted on this page
         with an updated revision date.

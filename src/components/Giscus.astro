@@ -1,0 +1,37 @@
+---
+import { GISCUS } from '../consts';
+
+// Renders the giscus comments widget (https://giscus.app), backed by GitHub
+// Discussions. Configuration lives in `src/consts.ts`. The widget only loads
+// once the required repo/category IDs have been provided.
+const configured = GISCUS.repoId !== '' && GISCUS.categoryId !== '';
+---
+
+{
+  configured && (
+    <section class="mt-16 border-t border-(--color-border) pt-12">
+      <h2 class="mb-6 font-mono text-xs tracking-widest text-(--color-muted-foreground) uppercase">
+        Comments
+      </h2>
+      <div class="giscus" />
+      <script
+        is:inline
+        src="https://giscus.app/client.js"
+        data-repo={GISCUS.repo}
+        data-repo-id={GISCUS.repoId}
+        data-category={GISCUS.category}
+        data-category-id={GISCUS.categoryId}
+        data-mapping={GISCUS.mapping}
+        data-strict="0"
+        data-reactions-enabled={GISCUS.reactionsEnabled}
+        data-emit-metadata="0"
+        data-input-position={GISCUS.inputPosition}
+        data-theme={GISCUS.theme}
+        data-lang={GISCUS.lang}
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async
+      />
+    </section>
+  )
+}
