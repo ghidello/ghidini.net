@@ -38,7 +38,7 @@ The killer features for my use case:
 
 2. **Tailwind CSS v4** — The new CSS-first configuration (`@import "tailwindcss"`) means no `tailwind.config.js` file. Astro integrates it as a Vite plugin with one command: `npx astro add tailwind`.
 
-3. **MDX** — I can embed interactive components directly in markdown posts. Perfect for technical writing.
+3. **MDX** — the integration is installed, so I can drop interactive components straight into a post when one calls for it. The posts so far are plain Markdown, but the capability is there the moment I need it.
 
 4. **Developer Experience** — Hot reload, TypeScript, familiar npm ecosystem. I'm not learning a new templating language.
 
@@ -60,8 +60,9 @@ npx astro add sitemap -y
 
 In the next posts in this series, I'll cover:
 
-- The content collection schema and series implementation
-- Dark/light theme with system preference detection
+- Linting and formatting setup
+- Lessons from the official Astro blog example
 - Deployment and CI/CD setup
+- Hardening: security headers, CSP automation, and GDPR-friendly comments
 
 Stay tuned!

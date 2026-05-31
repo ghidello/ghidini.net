@@ -114,8 +114,9 @@ Crawlers can now discover the sitemap without needing `robots.txt`.
 
 Not everything from the official example made sense for this blog:
 
-- **Astro Font API** — The example uses `fontProviders.local()` with a custom font. I'm sticking with system fonts for now — zero layout shift, instant rendering, and no font files to serve.
 - **`image()` schema helper** — Their content schema uses Astro's image optimization pipeline for hero images. I don't have hero images yet, so this is parked for later.
+
+(I originally parked the Astro Font API here too, but later adopted it to self-host fonts — see the [hardening post](/blog/hardening-security-headers-and-privacy/) at the end of this series.)
 
 Both are tracked in `TODO.md` for when they become relevant.
 
