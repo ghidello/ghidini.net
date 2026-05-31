@@ -102,8 +102,8 @@ It lives in its own folder (`worker-cron/`) with its own config, separate from t
   "compatibility_date": "2026-05-29",
   // 05:00 UTC daily ≈ 07:00 Europe/Rome (CEST), safely past Rome midnight.
   "triggers": {
-    "crons": ["0 5 * * *"]
-  }
+    "crons": ["0 5 * * *"],
+  },
 }
 ```
 

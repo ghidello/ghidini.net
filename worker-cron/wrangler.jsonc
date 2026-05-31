@@ -7,6 +7,6 @@
   // 05:00 UTC daily ≈ 07:00 Europe/Rome (CEST). Safely past Rome midnight so a
   // post dated for "today" in Rome is already publishable when the build runs.
   "triggers": {
-    "crons": ["0 5 * * *"]
-  }
+    "crons": ["0 5 * * *"],
+  },
 }

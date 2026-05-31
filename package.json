@@ -13,8 +13,14 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "eslint .",
+    "check": "prettier . --check && eslint .",
     "deploy": "npm run build && wrangler deploy",
-    "deploy:preview": "npm run build && wrangler dev"
+    "deploy:preview": "npm run build && wrangler dev",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{astro,js,mjs,ts,json,jsonc,md,css}": "prettier --write",
+    "*.{astro,js,mjs,ts}": "eslint --fix"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.1",
@@ -28,6 +34,8 @@
     "@typescript-eslint/parser": "8.60.0",
     "eslint": "10.4.0",
     "eslint-plugin-astro": "1.7.0",
+    "husky": "9.1.7",
+    "lint-staged": "17.0.7",
     "prettier": "3.8.3",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.8.0",
