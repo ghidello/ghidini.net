@@ -19,7 +19,7 @@
 // never committed — it lives only in the Worker's encrypted secret store.
 
 export default {
-  async scheduled(event, env, ctx) {
+  async scheduled(_event, env, _ctx) {
     if (!env.DEPLOY_HOOK_URL) {
       console.error('DEPLOY_HOOK_URL secret is not set; skipping rebuild trigger.');
       return;
