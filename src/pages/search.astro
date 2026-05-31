@@ -29,4 +29,88 @@ import { SITE_TITLE } from '../consts';
       }
     });
   </script>
+
+  <style is:global>
+    /* Theme the Pagefind UI to match the Flux Capacitor design system. */
+    #search {
+      --pagefind-ui-scale: 1;
+      --pagefind-ui-primary: var(--color-primary);
+      --pagefind-ui-text: var(--color-foreground);
+      --pagefind-ui-background: var(--color-surface);
+      --pagefind-ui-border: var(--color-border);
+      --pagefind-ui-tag: var(--color-surface);
+      --pagefind-ui-border-width: 1px;
+      --pagefind-ui-border-radius: 0.25rem;
+      --pagefind-ui-font: var(--font-sans);
+    }
+
+    /* Search input */
+    #search .pagefind-ui__search-input,
+    #search .pagefind-ui__search-clear {
+      background: var(--color-surface);
+      color: var(--color-foreground);
+    }
+    #search .pagefind-ui__search-input::placeholder {
+      color: var(--color-muted-foreground);
+    }
+
+    /* Result count / messages */
+    #search .pagefind-ui__message {
+      color: var(--color-muted-foreground);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Result titles — full brightness for legibility */
+    #search .pagefind-ui__result-title,
+    #search .pagefind-ui__result-title .pagefind-ui__result-link {
+      color: var(--color-foreground);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    #search .pagefind-ui__result-title .pagefind-ui__result-link:hover {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    /* Excerpt / snippet text — raise contrast above the dim default */
+    #search .pagefind-ui__result-excerpt {
+      color: color-mix(in oklab, var(--color-foreground) 80%, transparent);
+      line-height: 1.6;
+    }
+
+    /* Sub-result heading links */
+    #search .pagefind-ui__result-nested .pagefind-ui__result-link {
+      color: var(--color-muted-foreground);
+    }
+    #search .pagefind-ui__result-nested .pagefind-ui__result-link:hover {
+      color: var(--color-primary);
+    }
+
+    /* Match highlight — cyan tint instead of the clashing yellow default */
+    #search mark {
+      background: color-mix(in oklab, var(--color-primary) 22%, transparent);
+      color: var(--color-foreground);
+      border-radius: 2px;
+      padding: 0 0.1em;
+    }
+
+    /* Dividers between results */
+    #search .pagefind-ui__result {
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* "Load more" button */
+    #search .pagefind-ui__button {
+      background: var(--color-surface);
+      color: var(--color-foreground);
+      border: 1px solid var(--color-border);
+    }
+    #search .pagefind-ui__button:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+  </style>
 </BaseLayout>
