@@ -14,12 +14,12 @@ export async function getStaticPaths() {
 }
 
 const { guide } = Astro.props;
-const { title, description, pubDate, updatedDate, topic, tags } = guide.data;
+const { title, description, pubDate, updatedDate, topic, author, tags } = guide.data;
 const { Content } = await render(guide);
 ---
 
 <BaseLayout title={`${title} - ${SITE_TITLE}`} description={description}>
-  <article class="mx-auto max-w-3xl">
+  <article class="mx-auto max-w-4xl">
     <BackLink href="/guides" label="All guides" />
 
     <header class="mb-12 border-b border-(--color-border) pb-8">
@@ -38,6 +38,7 @@ const { Content } = await render(guide);
         class="flex flex-wrap items-center gap-4 font-mono text-xs text-(--color-muted-foreground)"
       >
         <FormattedDate date={pubDate} format="long" />
+        <span>· By {author}</span>
         {
           updatedDate && (
             <span>

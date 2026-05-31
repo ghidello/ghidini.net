@@ -9,12 +9,12 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, pubDate, updatedDate, heroImage, tags, series, seriesOrder } =
+const { title, description, pubDate, updatedDate, heroImage, author, tags, series, seriesOrder } =
   post.data;
 ---
 
 <BaseLayout title={title} description={description} image={heroImage}>
-  <article class="mx-auto max-w-3xl">
+  <article class="mx-auto max-w-4xl">
     <a
       href="/blog"
       class="mb-8 inline-block font-mono text-xs tracking-widest text-(--color-muted-foreground) uppercase hover:text-(--color-primary)"
@@ -41,6 +41,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, series, serie
         class="flex flex-wrap items-center gap-4 font-mono text-xs text-(--color-muted-foreground)"
       >
         <FormattedDate date={pubDate} format="long" />
+        <span>· By {author}</span>
         {
           updatedDate && (
             <span>
