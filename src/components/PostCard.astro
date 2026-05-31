@@ -22,19 +22,19 @@ const {
 const HeadingTag = headingLevel;
 const articleClass =
   variant === 'bordered'
-    ? 'group border-y border-transparent px-2 py-8 transition-colors hover:border-(--color-border) hover:bg-(--color-surface)/30'
+    ? 'group border-y border-transparent px-2 py-8 transition-colors hover:border-border hover:bg-surface/30'
     : 'group';
 ---
 
 <article class={articleClass}>
   <div
-    class="mb-3 flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-widest text-(--color-muted-foreground) uppercase"
+    class="text-muted-foreground mb-3 flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-widest uppercase"
   >
     <FormattedDate date={post.data.pubDate} />
     {
       post.data.series && (
         <>
-          <span class="text-(--color-primary)">&bull;</span>
+          <span class="text-primary">&bull;</span>
           <span>Series: {post.data.series.replace(/-/g, ' ')}</span>
         </>
       )
@@ -42,14 +42,14 @@ const articleClass =
   </div>
   <a href={`/blog/${post.id}`} class="block">
     <HeadingTag
-      class="mb-2 text-2xl font-bold text-(--color-foreground) transition-colors group-hover:text-(--color-primary)"
+      class="text-foreground group-hover:text-primary mb-2 text-2xl font-bold transition-colors"
     >
       {post.data.title}
     </HeadingTag>
   </a>
   {
     showDescription && post.data.description && (
-      <p class="mb-6 leading-relaxed text-(--color-muted-foreground)">{post.data.description}</p>
+      <p class="text-muted-foreground mb-6 leading-relaxed">{post.data.description}</p>
     )
   }
   {

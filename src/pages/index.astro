@@ -27,28 +27,24 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
   <!-- Hero -->
   <header class="mb-20">
     <div
-      class="mb-6 inline-block border border-(--color-accent)/30 bg-(--color-accent)/5 px-3 py-1 font-mono text-[10px] tracking-widest text-(--color-accent) uppercase"
+      class="border-accent/30 bg-accent/5 text-accent mb-6 inline-block border px-3 py-1 font-mono text-[10px] tracking-widest uppercase"
     >
       Status: Externalizing Consciousness
     </div>
     <h1
-      class="mb-6 text-5xl leading-none font-extrabold tracking-tight text-(--color-foreground) md:text-7xl"
+      class="text-foreground mb-6 text-5xl leading-none font-extrabold tracking-tight md:text-7xl"
     >
       Alessandro Ghidini
     </h1>
-    <p class="mb-8 text-xl leading-relaxed text-(--color-muted-foreground)">
+    <p class="text-muted-foreground mb-8 text-xl leading-relaxed">
       A software developer with a terrible memory &mdash; this blog is my external brain. Technical
-      deep-dives on <span class="text-(--color-foreground)">Astro</span>,{' '}
-      <span class="text-(--color-foreground)">Cloudflare Workers</span>, and why I forgot that one{
-        ' '
-      }
-      <span class="text-(--color-foreground) italic underline decoration-(--color-primary)"
-        >git</span
-      > command again.
+      deep-dives on <span class="text-foreground">Astro</span>,{' '}
+      <span class="text-foreground">Cloudflare Workers</span>, and why I forgot that one{' '}
+      <span class="text-foreground decoration-primary italic underline">git</span> command again.
     </p>
 
     <blockquote
-      class="border-l-2 border-(--color-primary)/30 bg-(--color-primary)/5 p-6 font-mono text-(--color-muted-foreground) italic"
+      class="border-primary/30 bg-primary/5 text-muted-foreground border-l-2 p-6 font-mono italic"
     >
       &ldquo;Roads? Where we&apos;re going, we don&apos;t need roads&hellip; but we definitely need
       better documentation.&rdquo;
@@ -62,18 +58,18 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
   <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
     <!-- Latest posts -->
     <section class="lg:col-span-8">
-      <div class="mb-8 flex items-center justify-between border-b border-(--color-border) pb-4">
-        <h2 class="font-mono text-sm font-bold tracking-widest text-(--color-foreground) uppercase">
+      <div class="border-border mb-8 flex items-center justify-between border-b pb-4">
+        <h2 class="text-foreground font-mono text-sm font-bold tracking-widest uppercase">
           Latest Transmissions
         </h2>
-        <a href="/blog" class="font-mono text-xs text-(--color-primary) hover:underline">
+        <a href="/blog" class="text-primary font-mono text-xs hover:underline">
           View All Index &rarr;
         </a>
       </div>
 
       {
         posts.length === 0 ? (
-          <p class="text-(--color-muted-foreground)">No posts yet. Check back soon!</p>
+          <p class="text-muted-foreground">No posts yet. Check back soon!</p>
         ) : (
           <div class="space-y-12">
             {posts.map((post) => (
@@ -86,23 +82,21 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
 
     <!-- Sidebar -->
     <aside class="space-y-8 lg:col-span-4">
-      <section class="border border-(--color-border) bg-(--color-surface)/30 p-6">
-        <h2
-          class="mb-6 font-mono text-xs font-bold tracking-widest text-(--color-foreground) uppercase"
-        >
+      <section class="border-border bg-surface/30 border p-6">
+        <h2 class="text-foreground mb-6 font-mono text-xs font-bold tracking-widest uppercase">
           Active Series
         </h2>
         <div class="space-y-4">
           {
             series.length === 0 ? (
-              <p class="font-mono text-xs text-(--color-muted-foreground)">No series yet.</p>
+              <p class="text-muted-foreground font-mono text-xs">No series yet.</p>
             ) : (
               series.map(([id, s]) => (
                 <a href={`/series/${id}`} class="group block">
-                  <div class="mb-1 font-mono text-xs tracking-widest text-(--color-accent) uppercase">
+                  <div class="text-accent mb-1 font-mono text-xs tracking-widest uppercase">
                     {String(s.count).padStart(2, '0')} parts
                   </div>
-                  <div class="font-bold text-(--color-foreground) capitalize transition-colors group-hover:text-(--color-primary)">
+                  <div class="text-foreground group-hover:text-primary font-bold capitalize transition-colors">
                     {s.title}
                   </div>
                 </a>
@@ -112,10 +106,8 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
         </div>
       </section>
 
-      <section class="border border-(--color-border) bg-(--color-surface)/30 p-6">
-        <h2
-          class="mb-6 font-mono text-xs font-bold tracking-widest text-(--color-foreground) uppercase"
-        >
+      <section class="border-border bg-surface/30 border p-6">
+        <h2 class="text-foreground mb-6 font-mono text-xs font-bold tracking-widest uppercase">
           Stack Reference
         </h2>
         <div class="flex flex-wrap gap-2">
@@ -123,7 +115,7 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
             allTags.map((tag) => (
               <a
                 href={`/tags/${tag}`}
-                class="border border-(--color-border) bg-(--color-surface) px-2 py-1 font-mono text-[10px] tracking-widest text-(--color-muted-foreground) uppercase transition-colors hover:border-(--color-primary) hover:text-(--color-primary)"
+                class="border-border bg-surface text-muted-foreground hover:border-primary hover:text-primary border px-2 py-1 font-mono text-[10px] tracking-widest uppercase transition-colors"
               >
                 {tag}
               </a>
@@ -132,13 +124,11 @@ const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
         </div>
       </section>
 
-      <section class="border border-(--color-border) bg-(--color-surface)/30 p-6">
-        <h2
-          class="mb-4 font-mono text-xs font-bold tracking-widest text-(--color-foreground) uppercase"
-        >
+      <section class="border-border bg-surface/30 border p-6">
+        <h2 class="text-foreground mb-4 font-mono text-xs font-bold tracking-widest uppercase">
           About this site
         </h2>
-        <p class="text-sm leading-relaxed text-(--color-muted-foreground)">
+        <p class="text-muted-foreground text-sm leading-relaxed">
           Notes from an engineer's lab notebook. Mostly for me, possibly useful to you. Built on
           Astro. Powered by 1.21 gigawatts.
         </p>

@@ -17,9 +17,9 @@ const posts = await getSortedBlogPosts();
 
   {
     posts.length === 0 ? (
-      <p class="text-(--color-muted-foreground)">No posts yet. Check back soon!</p>
+      <p class="text-muted-foreground">No posts yet. Check back soon!</p>
     ) : (
-      <div class="divide-y divide-(--color-border)/0">
+      <div class="divide-border/0 divide-y">
         {posts.map((post) => (
           <PostCard post={post} variant="bordered" />
         ))}

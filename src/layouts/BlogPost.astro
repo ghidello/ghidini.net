@@ -18,29 +18,27 @@ const { title, description, pubDate, updatedDate, heroImage, author, tags, serie
   <article class="mx-auto max-w-4xl">
     <a
       href="/blog"
-      class="mb-8 inline-block font-mono text-xs tracking-widest text-(--color-muted-foreground) uppercase hover:text-(--color-primary)"
+      class="text-muted-foreground hover:text-primary mb-8 inline-block font-mono text-xs tracking-widest uppercase"
     >
       &larr; All posts
     </a>
 
-    <header class="mb-12 border-b border-(--color-border) pb-8">
+    <header class="border-border mb-12 border-b pb-8">
       {
         series && (
-          <div class="mb-4 inline-block border border-(--color-accent)/30 bg-(--color-accent)/5 px-3 py-1 font-mono text-[10px] tracking-widest text-(--color-accent) uppercase">
+          <div class="border-accent/30 bg-accent/5 text-accent mb-4 inline-block border px-3 py-1 font-mono text-[10px] tracking-widest uppercase">
             Series: {series.replace(/-/g, ' ')}
             {seriesOrder ? ` · Part ${seriesOrder}` : ''}
           </div>
         )
       }
       <h1
-        class="mb-4 text-4xl leading-tight font-extrabold tracking-tight text-(--color-foreground) md:text-5xl"
+        class="text-foreground mb-4 text-4xl leading-tight font-extrabold tracking-tight md:text-5xl"
       >
         {title}
       </h1>
-      <p class="mb-6 text-lg text-(--color-muted-foreground)">{description}</p>
-      <div
-        class="flex flex-wrap items-center gap-4 font-mono text-xs text-(--color-muted-foreground)"
-      >
+      <p class="text-muted-foreground mb-6 text-lg">{description}</p>
+      <div class="text-muted-foreground flex flex-wrap items-center gap-4 font-mono text-xs">
         <FormattedDate date={pubDate} format="long" />
         <span>· By {author}</span>
         {
@@ -50,11 +48,7 @@ const { title, description, pubDate, updatedDate, heroImage, author, tags, serie
             </span>
           )
         }
-        {
-          tags.map((t) => (
-            <span class="bg-(--color-surface) px-2 py-0.5 ring-1 ring-(--color-border)">#{t}</span>
-          ))
-        }
+        {tags.map((t) => <span class="bg-surface ring-border px-2 py-0.5 ring-1">#{t}</span>)}
       </div>
     </header>
 

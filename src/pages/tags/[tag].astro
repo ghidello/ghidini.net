@@ -27,34 +27,32 @@ const { posts } = Astro.props;
   <BackLink href="/" label="Home" />
 
   <div class="mb-12">
-    <div class="mb-2 font-mono text-xs tracking-widest text-(--color-primary) uppercase">
+    <div class="text-primary mb-2 font-mono text-xs tracking-widest uppercase">
       // Tag · {String(posts.length).padStart(2, '0')} posts
     </div>
-    <h1 class="text-4xl font-extrabold tracking-tight text-(--color-foreground)">#{tag}</h1>
+    <h1 class="text-foreground text-4xl font-extrabold tracking-tight">#{tag}</h1>
   </div>
 
   <div class="space-y-8">
     {
       posts.map((post) => (
         <article class="group">
-          <div class="mb-2 flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-widest text-(--color-muted-foreground) uppercase">
+          <div class="text-muted-foreground mb-2 flex flex-wrap items-center gap-3 font-mono text-[10px] tracking-widest uppercase">
             <FormattedDate date={post.data.pubDate} />
             {post.data.series && (
               <>
-                <span class="text-(--color-primary)">•</span>
+                <span class="text-primary">•</span>
                 <span>Series: {post.data.series.replace(/-/g, ' ')}</span>
               </>
             )}
           </div>
           <a href={`/blog/${post.id}`} class="block">
-            <h2 class="mb-2 text-xl font-bold text-(--color-foreground) transition-colors group-hover:text-(--color-primary)">
+            <h2 class="text-foreground group-hover:text-primary mb-2 text-xl font-bold transition-colors">
               {post.data.title}
             </h2>
           </a>
           {post.data.description && (
-            <p class="text-sm leading-relaxed text-(--color-muted-foreground)">
-              {post.data.description}
-            </p>
+            <p class="text-muted-foreground text-sm leading-relaxed">{post.data.description}</p>
           )}
         </article>
       ))

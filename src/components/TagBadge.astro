@@ -6,8 +6,6 @@ interface Props {
 const { tag } = Astro.props;
 ---
 
-<span
-  class="border border-(--color-border) bg-(--color-surface) px-2 py-1 font-mono text-[10px] text-(--color-muted-foreground)"
->
+<span class="border-border bg-surface text-muted-foreground border px-2 py-1 font-mono text-[10px]">
   #{tag}
 </span>

@@ -157,7 +157,7 @@ This is the part I want to dwell on, because it's **not** the proxy configuratio
 The typical Angular setup uses a static `proxy.conf.json` file — a plain JSON object that maps a path prefix to a target URL. That works fine for anonymous APIs, but it falls apart here for two reasons:
 
 1. **The target isn't known ahead of time.** Aspire assigns the Web API's HTTPS endpoint at runtime and exposes it through the `WEB_HTTPS` environment variable. A static JSON file can't read environment variables.
-2. **Windows Authentication is connection-bound.** Negotiate (NTLM/Kerberos) authenticates the *TCP connection*, not the individual request. The default proxy agent opens a fresh connection per request, which silently breaks the handshake — you authenticate, then the next request lands on a brand new, unauthenticated socket.
+2. **Windows Authentication is connection-bound.** Negotiate (NTLM/Kerberos) authenticates the _TCP connection_, not the individual request. The default proxy agent opens a fresh connection per request, which silently breaks the handshake — you authenticate, then the next request lands on a brand new, unauthenticated socket.
 
 The fix is to use a **JavaScript** proxy config (`proxy.conf.js`) instead of JSON. That lets the proxy read the runtime target from the environment and, crucially, supply a custom `keepAlive` agent so the same connection — and therefore the same authenticated session — is reused across requests:
 

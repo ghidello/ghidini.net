@@ -19,4 +19,4 @@ export const GISCUS = {
   inputPosition: 'top',
   theme: 'transparent_dark',
   lang: 'en',
-} as const;
+};

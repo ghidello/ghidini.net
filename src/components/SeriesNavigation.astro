@@ -20,8 +20,8 @@ const seriesPosts = allPosts.sort((a, b) => (a.data.seriesOrder ?? 0) - (b.data.
 
 {
   series && seriesPosts.length > 1 && (
-    <aside class="mt-16 border border-(--color-border) bg-(--color-surface)/30 p-6">
-      <div class="mb-4 font-mono text-xs tracking-widest text-(--color-primary) uppercase">
+    <aside class="border-border bg-surface/30 mt-16 border p-6">
+      <div class="text-primary mb-4 font-mono text-xs tracking-widest uppercase">
         Series · {series.replace(/-/g, ' ')}
       </div>
       <ol class="space-y-2">
@@ -29,16 +29,13 @@ const seriesPosts = allPosts.sort((a, b) => (a.data.seriesOrder ?? 0) - (b.data.
           const current = post.id === currentPost.id;
           return (
             <li class="flex gap-3 font-mono text-sm">
-              <span class="text-(--color-muted-foreground)">
+              <span class="text-muted-foreground">
                 {String(post.data.seriesOrder ?? 0).padStart(2, '0')}.
               </span>
               {current ? (
-                <span class="text-(--color-primary)">{post.data.title}</span>
+                <span class="text-primary">{post.data.title}</span>
               ) : (
-                <a
-                  href={`/blog/${post.id}`}
-                  class="text-(--color-foreground) hover:text-(--color-primary)"
-                >
+                <a href={`/blog/${post.id}`} class="text-foreground hover:text-primary">
                   {post.data.title}
                 </a>
               )}

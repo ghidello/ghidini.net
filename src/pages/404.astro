@@ -5,18 +5,18 @@ import { SITE_TITLE } from '../consts';
 
 <BaseLayout title={`Page Not Found - ${SITE_TITLE}`} description="Page not found">
   <div class="flex flex-col items-center justify-center py-24 text-center">
-    <p class="mb-4 font-mono text-xs tracking-widest text-(--color-accent) uppercase">
+    <p class="text-accent mb-4 font-mono text-xs tracking-widest uppercase">
       [ERROR // TEMPORAL_DRIFT]
     </p>
-    <h1 class="font-mono text-7xl font-bold tracking-tighter text-(--color-foreground)">404</h1>
-    <h2 class="mt-4 text-xl font-semibold text-(--color-foreground)">That page is outatime</h2>
-    <p class="mt-2 text-sm text-(--color-muted-foreground)">
+    <h1 class="text-foreground font-mono text-7xl font-bold tracking-tighter">404</h1>
+    <h2 class="text-foreground mt-4 text-xl font-semibold">That page is outatime</h2>
+    <p class="text-muted-foreground mt-2 text-sm">
       The page you're looking for doesn't exist (or hasn't been invented yet).
     </p>
     <div class="mt-6">
       <a
         href="/"
-        class="inline-flex items-center justify-center border border-(--color-primary)/40 bg-(--color-primary)/10 px-4 py-2 font-mono text-xs tracking-widest text-(--color-primary) uppercase transition-colors hover:bg-(--color-primary) hover:text-(--color-background)"
+        class="border-primary/40 bg-primary/10 text-primary hover:bg-primary hover:text-background inline-flex items-center justify-center border px-4 py-2 font-mono text-xs tracking-widest uppercase transition-colors"
       >
         &larr; Return to base
       </a>

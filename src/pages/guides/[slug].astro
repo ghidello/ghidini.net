@@ -23,21 +23,19 @@ const { Content } = await render(guide);
   <article class="mx-auto max-w-4xl">
     <BackLink href="/guides" label="All guides" />
 
-    <header class="mb-12 border-b border-(--color-border) pb-8">
+    <header class="border-border mb-12 border-b pb-8">
       <div
-        class="mb-4 inline-block border border-(--color-accent)/30 bg-(--color-accent)/5 px-3 py-1 font-mono text-[10px] tracking-widest text-(--color-accent) uppercase"
+        class="border-accent/30 bg-accent/5 text-accent mb-4 inline-block border px-3 py-1 font-mono text-[10px] tracking-widest uppercase"
       >
         {topic}
       </div>
       <h1
-        class="mb-4 text-4xl leading-tight font-extrabold tracking-tight text-(--color-foreground) md:text-5xl"
+        class="text-foreground mb-4 text-4xl leading-tight font-extrabold tracking-tight md:text-5xl"
       >
         {title}
       </h1>
-      <p class="mb-4 text-lg text-(--color-muted-foreground)">{description}</p>
-      <div
-        class="flex flex-wrap items-center gap-4 font-mono text-xs text-(--color-muted-foreground)"
-      >
+      <p class="text-muted-foreground mb-4 text-lg">{description}</p>
+      <div class="text-muted-foreground flex flex-wrap items-center gap-4 font-mono text-xs">
         <FormattedDate date={pubDate} format="long" />
         <span>· By {author}</span>
         {
@@ -47,11 +45,7 @@ const { Content } = await render(guide);
             </span>
           )
         }
-        {
-          tags.map((t) => (
-            <span class="bg-(--color-surface) px-2 py-0.5 ring-1 ring-(--color-border)">#{t}</span>
-          ))
-        }
+        {tags.map((t) => <span class="bg-surface ring-border px-2 py-0.5 ring-1">#{t}</span>)}
       </div>
     </header>
 
